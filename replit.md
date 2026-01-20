@@ -6,6 +6,7 @@ This is a high-end personal brand website designed for a senior professional. It
 
 The site includes:
 - **Home page** with hero section and featured content
+- **Black Hole Intro** - Full-page Canvas animation on first visit with shapes pulled into center
 - **Projects/Work archive** with detailed project pages
 - **Blog/Journal** for professional insights and updates
 - **Contact form** for inquiries
