@@ -11,6 +11,34 @@ The site includes:
 - **Blog/Journal** for professional insights and updates
 - **Contact form** for inquiries
 
+## Adding New Articles
+
+To add new articles/blog posts, insert into the `posts` table with these fields:
+- `title`: Article title
+- `slug`: URL-friendly identifier (e.g., "my-new-article")
+- `content`: Full article content (supports markdown-style formatting)
+- `status`: "published" or "draft"
+- `tags`: Array of strings (e.g., ARRAY['TypeScript', 'AI'])
+- `summary`: Short description for list views
+- `published_at`: Publication date (defaults to NOW())
+
+Example SQL:
+```sql
+INSERT INTO posts (title, slug, content, status, tags, summary)
+VALUES ('My Article', 'my-article', 'Article content...', 'published', ARRAY['Tag1'], 'Summary');
+```
+
+## Adding New Projects
+
+Insert into the `projects` table:
+- `name`: Project name
+- `description`: Full description
+- `role`: Your role (e.g., "Lead Developer")
+- `tech_stack`: Array of technologies
+- `featured`: true/false for homepage display
+- `link`: GitHub or external URL
+- `year`: Year string (e.g., "2026")
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
