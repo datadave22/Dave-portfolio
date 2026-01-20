@@ -41,6 +41,28 @@
   /* Typography Variables */
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
+  
+  /* ═══════════════════════════════════════════════════════
+     MOTION TOKENS (MANDATORY)
+     ═══════════════════════════════════════════════════════ */
+  
+  /* Easing Curves - Apple-style, editorial motion */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0.0, 1, 1);
+  
+  /* Duration Tokens */
+  --duration-fast: 300ms;
+  --duration-standard: 600ms;
+  --duration-slow: 900ms;
+  
+  /* Distance Tokens */
+  --distance-small: 24px;
+  --distance-medium: 48px;
+  --distance-large: 72px;
+  
+  /* Scale Tokens */
+  --scale-entry: 0.98;
+  --scale-exit: 0.98;
 }
 
 @layer base {
