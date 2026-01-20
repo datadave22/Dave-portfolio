@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -7,6 +8,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { BlackHoleIntro } from "@/components/BlackHoleIntro";
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
@@ -65,9 +67,30 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  const [showIntro, setShowIntro] = useState(() => {
+    if (typeof window !== "undefined") {
+      const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
+      return !hasSeenIntro && window.location.pathname === "/";
+    }
+    return false;
+  });
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    sessionStorage.setItem("hasSeenIntro", "true");
+  };
+
+  useEffect(() => {
+    if (location !== "/") {
+      setShowIntro(false);
+    }
+  }, [location]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        {showIntro && <BlackHoleIntro onComplete={handleIntroComplete} />}
         <div className="flex flex-col min-h-screen bg-background font-sans text-foreground selection:bg-primary selection:text-white">
           <Navigation />
           <main className="flex-grow relative z-10">
