@@ -1,6 +1,43 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+.cache/
+server/public/
+
+# Environment files (secrets should stay in Replit's Secrets panel)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# OS files
 .DS_Store
-server/public
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Replit specific
+.upm/
 vite.config.ts.*
+
+# Temp files
+tmp/
+temp/
+*.tmp
 *.tar.gz
+
+# Database local files
+*.db
+*.sqlite

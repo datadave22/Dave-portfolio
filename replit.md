@@ -11,34 +11,6 @@ The site includes:
 - **Blog/Journal** for professional insights and updates
 - **Contact form** for inquiries
 
-## Adding New Articles
-
-To add new articles/blog posts, insert into the `posts` table with these fields:
-- `title`: Article title
-- `slug`: URL-friendly identifier (e.g., "my-new-article")
-- `content`: Full article content (supports markdown-style formatting)
-- `status`: "published" or "draft"
-- `tags`: Array of strings (e.g., ARRAY['TypeScript', 'AI'])
-- `summary`: Short description for list views
-- `published_at`: Publication date (defaults to NOW())
-
-Example SQL:
-```sql
-INSERT INTO posts (title, slug, content, status, tags, summary)
-VALUES ('My Article', 'my-article', 'Article content...', 'published', ARRAY['Tag1'], 'Summary');
-```
-
-## Adding New Projects
-
-Insert into the `projects` table:
-- `name`: Project name
-- `description`: Full description
-- `role`: Your role (e.g., "Lead Developer")
-- `tech_stack`: Array of technologies
-- `featured`: true/false for homepage display
-- `link`: GitHub or external URL
-- `year`: Year string (e.g., "2026")
-
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -113,3 +85,70 @@ shared/           # Code shared between client and server
 - **Vite**: Frontend dev server and bundler
 - **tsx**: TypeScript execution for development
 - **drizzle-kit**: Database schema push via `npm run db:push`
+
+## Collaboration & Workflow
+
+### For AI Assistants (ChatGPT, Claude, etc.)
+
+When making changes to this project, follow these guidelines:
+
+**Adding New Articles:**
+```sql
+INSERT INTO posts (title, slug, content, status, tags, summary)
+VALUES (
+  'Article Title',
+  'article-slug',
+  'Your markdown content here...',
+  'published',
+  ARRAY['Tag1', 'Tag2'],
+  'Brief summary for cards'
+);
+```
+
+**Adding New Projects:**
+```sql
+INSERT INTO projects (name, description, role, tech_stack, featured, link, year)
+VALUES (
+  'Project Name',
+  'Full description...',
+  'Your Role',
+  ARRAY['Tech1', 'Tech2'],
+  true,
+  'https://github.com/username/repo',
+  '2026'
+);
+```
+
+### Key Files to Modify
+
+| Task | File(s) |
+|------|---------|
+| Add new page | `client/src/pages/` + register in `App.tsx` |
+| Update navigation | `client/src/components/Navigation.tsx` |
+| Modify database schema | `shared/schema.ts` then run `npm run db:push` |
+| Add API endpoint | `server/routes.ts` |
+| Update styling | `client/src/index.css` or component files |
+| Black hole animation | `client/src/components/BlackHoleIntro.tsx` |
+
+### Running the Project
+
+- **Start**: The app runs via the "Start application" workflow (`npm run dev`)
+- **Database sync**: `npm run db:push` applies schema changes
+- **Build**: Handled automatically by Replit when publishing
+
+### GitHub Integration
+
+To connect this project to GitHub:
+1. Create a new repository on GitHub
+2. Go to Replit Settings → Git
+3. Connect your GitHub account
+4. Link to your repository
+
+For collaborative development with branches:
+1. Clone the repo locally or use GitHub Codespaces
+2. Create branches: `main` (production), `develop` (active work)
+3. Push changes, then sync back to Replit
+
+### Publishing
+
+The site is publish-ready. Use Replit's "Publish" button to deploy. The published version will be available at your `.replit.app` domain or a custom domain if configured.
