@@ -1,15 +1,20 @@
-# Personal Brand Portfolio Website
+# David J. Johnson Portfolio Website
 
 ## Overview
 
-This is a high-end personal brand website designed for a senior professional. It functions as a marketing surface, professional journal, and central hub for resume, projects, and contact information. The design philosophy emphasizes Apple-level polish, editorial restraint, and architectural clarity with Cosmos-style scroll experiences using geometric forms.
+This is a high-end personal brand website for David J. Johnson, a software developer and cybersecurity analyst. It showcases technical projects, professional expertise, and security experience. The design philosophy emphasizes Apple-level polish, editorial restraint, and architectural clarity.
+
+**Branding:**
+- Navigation logo: "DJJ."
+- Full name: "DAVID J. JOHNSON"
+- GitHub: github.com/datadave22
 
 The site includes:
-- **Home page** with hero section and featured content
-- **Black Hole Intro** - Full-page Canvas animation on first visit with shapes pulled into center
-- **Projects/Work archive** with detailed project pages
-- **Blog/Journal** for professional insights and updates
-- **Contact form** for inquiries
+- **Home page** with hero section, professional summary, skills, projects, cybersecurity experience
+- **Black Hole Intro** - Parametric mathematical animation using golden ratio color palette (gold, amber, muted blues)
+- **Projects/Work archive** with GitHub-linked projects (DocuMind AI, SRE Toolkit, Smart Title Case)
+- **Blog/Insights** for technical articles
+- **Contact form** with real GitHub link
 
 ## User Preferences
 
