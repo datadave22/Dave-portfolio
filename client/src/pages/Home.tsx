@@ -79,7 +79,7 @@ export default function Home() {
             </p>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tighter leading-[0.95] text-balance mb-6">
-              DAVID J.<br />
+              DAVID<br />
               <span className="text-muted-foreground">JOHNSON</span>
             </h1>
           </motion.div>

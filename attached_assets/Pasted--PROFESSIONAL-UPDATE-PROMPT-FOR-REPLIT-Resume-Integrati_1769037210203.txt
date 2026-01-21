@@ -1,0 +1,146 @@
+🚀 PROFESSIONAL UPDATE PROMPT FOR REPLIT
+(Resume Integration + Naming + Contact Behavior)
+
+📌 OVERALL GOAL
+Enhance the existing site layout at https://elite-designer--dave78234578.replit.app/ by:
+1) Integrating my professional resume in a clean, hiring-manager-friendly way
+2) Standardizing naming across the site
+3) Ensuring the contact form correctly delivers emails
+4) Maintaining a polished, professional portfolio experience
+
+────────────────────────────────────────
+1. NAME & BRANDING UPDATE
+────────────────────────────────────────
+
+Update all references across the site as follows:
+- Replace “DJJ” with “DJ”
+- Display full professional name as: **David Johnson**
+- Use “DJ” only as a shorthand or personal brand reference where appropriate
+- Ensure consistent naming across:
+  - Hero section
+  - Navigation
+  - Footer
+  - Metadata / page titles
+
+Primary display name:
+**David Johnson**
+
+────────────────────────────────────────
+2. RESUME INTEGRATION (PROFESSIONAL BEST PRACTICE)
+────────────────────────────────────────
+
+Do NOT embed the full resume directly into the contact section.
+
+Instead, implement ONE of the following professional approaches (preferred order):
+
+OPTION A (RECOMMENDED):
+- Create a dedicated **Resume page** (e.g. /resume)
+- Add “Resume” to the main navigation
+- Render the resume content in clean, readable HTML styled to match the site
+- Include a prominent “Download PDF” button
+
+OPTION B:
+- Host the resume as a downloadable PDF
+- Link it clearly from:
+  - Navigation (“Resume”)
+  - Contact section (“View Resume” / “Download Resume”)
+
+OPTION C (SECONDARY):
+- In the Contact section, include a short professional line:
+  “View my resume for detailed experience and technical background.”
+  with a link to the Resume page or PDF
+
+DO NOT overload the contact page with dense resume text.
+
+────────────────────────────────────────
+3. RESUME CONTENT SOURCE & STRUCTURE
+────────────────────────────────────────
+
+Use the provided LaTeX resume as the authoritative source of truth.
+
+Resume Title:
+**David Johnson**
+Senior DevOps / MLOps Platform Engineer
+
+Core focus areas to preserve:
+- CI/CD automation
+- Linux systems & internals
+- HPC (CPU/GPU) environments
+- Cloud & container platforms
+- Reproducible ML infrastructure
+- Secure and regulated environments
+
+Sections to include on the Resume page:
+1. Summary
+2. Core Technical Strengths
+3. Professional Experience
+   - John Deere — Advanced R&D Lab
+   - U.S. Department of Energy — National Laboratory
+   - CyberPatriot / CPTC
+4. Impact statements (retain bold “Impact:” lines)
+
+Resume tone must remain:
+- Senior-level
+- Systems-focused
+- Impact-driven
+- Clear and concise
+
+────────────────────────────────────────
+4. CONTACT PAGE FUNCTIONALITY
+────────────────────────────────────────
+
+Contact page URL:
+https://elite-designer--dave78234578.replit.app/contact
+
+Requirements:
+- Ensure the contact form sends email notifications to:
+  **d86272796+portfolio@gmail.com**
+- Trigger email on successful form submission
+- Include:
+  - Name
+  - Email
+  - Message
+- Display a professional success confirmation message after submission
+
+Optional enhancements:
+- Spam protection (basic honeypot or validation)
+- Clean, minimal form styling consistent with site theme
+
+────────────────────────────────────────
+5. CONTACT SECTION CONTENT
+────────────────────────────────────────
+
+Suggested professional copy:
+
+“Interested in collaboration, engineering roles, or technical consultation?
+Feel free to reach out — I respond promptly.”
+
+Include:
+- Contact form
+- Direct email link
+- Resume link (not full resume text)
+
+────────────────────────────────────────
+6. NAVIGATION & UX UPDATES
+────────────────────────────────────────
+
+Ensure navigation includes:
+- Home
+- Projects
+- Resume
+- Contact
+- GitHub / LinkedIn (external)
+
+Resume should be no more than one click away from the homepage.
+
+────────────────────────────────────────
+7. END GOAL
+────────────────────────────────────────
+
+The site should present a cohesive, senior-level engineering portfolio that:
+- Feels credible to hiring managers and technical leaders
+- Separates marketing content from detailed resume material
+- Makes contacting and reviewing qualifications effortless
+- Maintains consistency in naming, tone, and structure
+
+All changes should integrate cleanly with the existing layout and animation theme.

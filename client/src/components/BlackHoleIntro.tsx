@@ -298,7 +298,7 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-6">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight text-white mb-4">
-          David J. Johnson
+          David Johnson
         </h1>
         <p className="text-lg md:text-xl text-white/60 max-w-2xl font-light">
           Technology & Cybersecurity Professional

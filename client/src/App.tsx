@@ -14,6 +14,7 @@ import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
 import Posts from "@/pages/Posts";
 import PostDetail from "@/pages/PostDetail";
+import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 import { easing, duration, distance } from "@/lib/motion";
@@ -56,6 +57,9 @@ function Router() {
         </Route>
         <Route path="/posts/:slug">
           <PageTransition><PostDetail /></PageTransition>
+        </Route>
+        <Route path="/resume">
+          <PageTransition><Resume /></PageTransition>
         </Route>
         <Route path="/contact">
           <PageTransition><Contact /></PageTransition>
