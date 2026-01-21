@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { Download, ExternalLink } from "lucide-react";
-import { SectionHeader } from "@/components/SectionHeader";
+import { ExternalLink } from "lucide-react";
 import {
   sectionVariants,
   staggerContainer,
@@ -81,9 +80,9 @@ export default function Resume() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium text-sm transition-opacity duration-200 hover:opacity-80"
-              data-testid="button-download-resume"
+              data-testid="link-github-resume-header"
             >
-              <Download className="w-4 h-4" /> Download PDF
+              <ExternalLink className="w-4 h-4" /> View on GitHub
             </a>
           </div>
 

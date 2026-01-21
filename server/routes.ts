@@ -15,7 +15,8 @@ export async function registerRoutes(
   });
 
   app.get(api.posts.get.path, async (req, res) => {
-    const post = await storage.getPost(req.params.slug);
+    const slug = Array.isArray(req.params.slug) ? req.params.slug[0] : req.params.slug;
+    const post = await storage.getPost(slug);
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }

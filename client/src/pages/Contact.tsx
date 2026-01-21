@@ -6,7 +6,8 @@ import { useSendMessage } from "@/hooks/use-content";
 import { useToast } from "@/hooks/use-toast";
 import { SectionHeader } from "@/components/SectionHeader";
 import { motion } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { Loader2, FileText, ExternalLink } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -46,28 +47,36 @@ export default function Contact() {
         <div>
           <SectionHeader 
             title="GET IN TOUCH" 
-            subtitle="Available for opportunities and technical consultation."
+            subtitle="Available for engineering roles and technical consultation."
             className="mb-12"
           />
           
           <div className="space-y-8 text-lg text-muted-foreground">
             <p>
-              I am currently open to discussing software development projects, cybersecurity consulting, and engineering roles where I can deliver measurable impact.
+              Interested in collaboration, engineering roles, or technical consultation? 
+              Feel free to reach out — I respond promptly.
             </p>
+            <div>
+              <h4 className="text-foreground font-display font-medium mb-2">Resume</h4>
+              <Link 
+                href="/resume"
+                className="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                data-testid="link-resume-contact"
+              >
+                <FileText className="w-4 h-4" /> View my resume for detailed experience
+              </Link>
+            </div>
             <div>
               <h4 className="text-foreground font-display font-medium mb-2">GitHub</h4>
               <a 
                 href="https://github.com/datadave22" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                data-testid="link-github-contact"
               >
-                github.com/datadave22
+                <ExternalLink className="w-4 h-4" /> github.com/datadave22
               </a>
-            </div>
-            <div>
-              <h4 className="text-foreground font-display font-medium mb-2">Location</h4>
-              <p>Available remotely, worldwide</p>
             </div>
           </div>
         </div>
@@ -83,8 +92,10 @@ export default function Contact() {
               <label htmlFor="name" className="text-sm font-medium tracking-wide uppercase">Name</label>
               <input
                 {...form.register("name")}
+                id="name"
                 className="w-full bg-background border border-border px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-muted-foreground/50"
-                placeholder="John Doe"
+                placeholder="Your name"
+                data-testid="input-name"
               />
               {form.formState.errors.name && (
                 <p className="text-xs text-destructive">{form.formState.errors.name.message}</p>
@@ -95,9 +106,11 @@ export default function Contact() {
               <label htmlFor="email" className="text-sm font-medium tracking-wide uppercase">Email</label>
               <input
                 {...form.register("email")}
+                id="email"
                 type="email"
                 className="w-full bg-background border border-border px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-muted-foreground/50"
-                placeholder="john@company.com"
+                placeholder="your@email.com"
+                data-testid="input-email"
               />
               {form.formState.errors.email && (
                 <p className="text-xs text-destructive">{form.formState.errors.email.message}</p>
@@ -108,9 +121,11 @@ export default function Contact() {
               <label htmlFor="message" className="text-sm font-medium tracking-wide uppercase">Message</label>
               <textarea
                 {...form.register("message")}
+                id="message"
                 rows={5}
                 className="w-full bg-background border border-border px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-muted-foreground/50 resize-none"
-                placeholder="Tell me about your project..."
+                placeholder="Tell me about your project or opportunity..."
+                data-testid="input-message"
               />
               {form.formState.errors.message && (
                 <p className="text-xs text-destructive">{form.formState.errors.message.message}</p>
@@ -121,6 +136,7 @@ export default function Contact() {
               type="submit"
               disabled={mutation.isPending}
               className="w-full bg-foreground text-background font-medium py-4 px-6 hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2"
+              data-testid="button-submit"
             >
               {mutation.isPending ? (
                 <>

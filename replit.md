@@ -1,20 +1,28 @@
-# David J. Johnson Portfolio Website
+# David Johnson Portfolio Website
 
 ## Overview
 
-This is a high-end personal brand website for David J. Johnson, a software developer and cybersecurity analyst. It showcases technical projects, professional expertise, and security experience. The design philosophy emphasizes Apple-level polish, editorial restraint, and architectural clarity.
+This is a high-end personal brand website for David Johnson, a Senior DevOps/MLOps Platform Engineer. It showcases technical projects, professional expertise, and security experience. The design philosophy emphasizes Apple-level polish, editorial restraint, and architectural clarity.
 
 **Branding:**
-- Navigation logo: "DJJ."
-- Full name: "DAVID J. JOHNSON"
+- Navigation logo: "DJ."
+- Full name: "DAVID JOHNSON"
 - GitHub: github.com/datadave22
 
 The site includes:
 - **Home page** with hero section, professional summary, skills, projects, cybersecurity experience
 - **Black Hole Intro** - Parametric mathematical animation using golden ratio color palette (gold, amber, muted blues)
-- **Projects/Work archive** with GitHub-linked projects (DocuMind AI, SRE Toolkit, Smart Title Case)
+- **Resume page** - Professional experience with CI/CD, HPC, cloud platforms, and security
+- **Projects/Work archive** with GitHub-linked projects
 - **Blog/Insights** for technical articles
-- **Contact form** with real GitHub link
+- **Contact form** with resume link and GitHub
+
+## Email Configuration (TODO)
+
+The contact form currently stores messages to the database. To enable email notifications:
+1. Set up Resend integration via Replit's integrations panel
+2. Or add `RESEND_API_KEY` secret and implement email sending in `server/routes.ts`
+3. Target email: d86272796+portfolio@gmail.com
 
 ## User Preferences
 
