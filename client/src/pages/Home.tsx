@@ -3,7 +3,8 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Github, Mail, Code, Shield, Wrench, Users } from "lucide-react";
+import { SiJavascript, SiPython, SiReact, SiNodedotjs, SiDocker, SiGit } from "react-icons/si";
 import {
   sectionVariants,
   heroGeometryVariants,
@@ -25,41 +26,40 @@ export default function Home() {
   const featuredProjects = projects?.filter(p => p.featured).slice(0, 3) || projects?.slice(0, 3) || [];
   const latestPosts = posts?.slice(0, 3) || [];
 
+  const technicalSkills = [
+    { icon: SiJavascript, name: "JavaScript" },
+    { icon: SiPython, name: "Python" },
+    { icon: SiReact, name: "React" },
+    { icon: SiNodedotjs, name: "Node.js" },
+    { icon: SiDocker, name: "Docker" },
+    { icon: SiGit, name: "Git" },
+  ];
+
+  const professionalStrengths = [
+    { icon: Code, title: "Full Stack Development", desc: "Front & Back End engineering with modern frameworks" },
+    { icon: Shield, title: "Cybersecurity", desc: "Penetration testing, ethical hacking, network defense" },
+    { icon: Wrench, title: "Automation & DevOps", desc: "CI/CD pipelines and workflow automation" },
+    { icon: Users, title: "Technical Communication", desc: "Clear documentation and cross-team collaboration" },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* ═══════════════════════════════════════════════════════
           HERO SECTION
-          Geometry loads first, text fades in second
-          Entry-based transitions only - no continuous parallax
           ═══════════════════════════════════════════════════════ */}
       <section className="min-h-screen flex flex-col justify-center px-6 relative overflow-hidden">
-        {/* Geometric Background Elements - Structural, not decorative */}
         <motion.div
           initial={prefersReducedMotion ? false : "hidden"}
           animate="visible"
           variants={heroGeometryVariants}
           className="absolute inset-0 pointer-events-none"
         >
-          {/* Primary geometric plane - muted warm gray */}
-          <div className="absolute top-[15%] right-[10%] w-[35vw] h-[45vh] bg-muted/40" />
-          
-          {/* Horizontal structural line */}
+          <div className="absolute top-[15%] right-[10%] w-[35vw] h-[45vh] bg-muted/30" />
           <motion.div 
             variants={prefersReducedMotion ? undefined : horizontalLineVariants}
             className="absolute top-1/3 left-0 w-[60%] h-px bg-border origin-left"
           />
-          
-          {/* Vertical accent line */}
           <div className="absolute top-[20%] right-[30%] w-px h-[40vh] bg-primary/20" />
-          
-          {/* Grid structural element - fixed opacity, no randomization */}
-          <div className="absolute bottom-[10%] left-[5%] w-32 h-32 grid grid-cols-4 grid-rows-4 gap-px opacity-30">
-            {Array(16).fill(0).map((_, i) => (
-              <div key={i} className="bg-muted-foreground/10" />
-            ))}
-          </div>
-          
-          {/* Circle accent - used sparingly */}
           <div className="absolute bottom-[25%] right-[15%] w-24 h-24 rounded-full border border-border" />
         </motion.div>
 
@@ -73,9 +73,14 @@ export default function Home() {
               variants={prefersReducedMotion ? undefined : horizontalLineVariants}
               className="w-16 h-px bg-foreground mb-8 origin-left"
             />
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-medium tracking-tighter leading-[0.9] text-balance mb-8">
-              DIGITAL<br />
-              <span className="text-muted-foreground">ARCHITECT</span>
+            
+            <p className="text-primary text-sm font-mono uppercase tracking-widest mb-4">
+              Software Developer | Cybersecurity Analyst | Technical Problem Solver
+            </p>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tighter leading-[0.95] text-balance mb-6">
+              DAVID J.<br />
+              <span className="text-muted-foreground">JOHNSON</span>
             </h1>
           </motion.div>
 
@@ -83,34 +88,45 @@ export default function Home() {
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
             variants={heroTextVariants}
-            className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-12"
+            className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-8"
           >
-            <div className="md:col-span-5 md:col-start-8">
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
-                Building refined digital experiences with a focus on structural elegance and user-centric functionality.
+            <div className="md:col-span-6 md:col-start-7">
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light mb-6">
+                Strategic problem-solver specializing in software development, cybersecurity research, and automation solutions that increase operational efficiency and reduce risk.
+              </p>
+              <p className="text-base text-muted-foreground/80 leading-relaxed mb-8">
+                I build robust software systems, perform data-driven security assessments, and deliver measurable business impact.
               </p>
               
-              <div className="mt-8 flex gap-6 items-center">
+              <div className="flex flex-wrap gap-4 items-center">
                 <Link 
                   href="/projects" 
-                  className="inline-flex items-center gap-2 text-foreground font-medium transition-opacity duration-200 hover:opacity-70"
-                  data-testid="link-view-works"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium text-sm transition-opacity duration-200 hover:opacity-80"
+                  data-testid="link-projects-hero"
                 >
-                  View Selected Works <ArrowRight className="w-4 h-4" />
+                  View Projects <ArrowRight className="w-4 h-4" />
                 </Link>
+                <a 
+                  href="https://github.com/datadave22"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-3 border border-border text-muted-foreground font-medium text-sm transition-colors duration-200 hover:text-foreground hover:border-foreground"
+                  data-testid="link-github"
+                >
+                  <Github className="w-4 h-4" /> GitHub
+                </a>
                 <Link 
                   href="/contact" 
                   className="inline-flex items-center gap-2 text-muted-foreground transition-opacity duration-200 hover:opacity-70"
                   data-testid="link-contact-hero"
                 >
-                  Get in Touch
+                  <Mail className="w-4 h-4" /> Contact
                 </Link>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div 
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -123,8 +139,84 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          WORK SECTION
-          Section-based scroll choreography
+          ABOUT / PROFESSIONAL SUMMARY
+          ═══════════════════════════════════════════════════════ */}
+      <motion.section 
+        initial={prefersReducedMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={sectionVariants}
+        className="py-24 bg-foreground text-background px-6 relative overflow-hidden"
+      >
+        <motion.div 
+          initial={prefersReducedMotion ? false : { x: -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 0.1 }}
+          transition={{ duration: duration.slow, ease: [0.4, 0.0, 0.2, 1] }}
+          viewport={viewportOnceConfig}
+          className="absolute top-0 left-0 w-1/3 h-full bg-background/10"
+        />
+        
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start relative z-10">
+          <motion.div
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+          >
+            <motion.span 
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-primary text-xs font-mono mb-4 block uppercase tracking-widest"
+            >
+              Professional Summary
+            </motion.span>
+            <motion.h2 
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-3xl md:text-4xl font-display leading-tight mb-8"
+            >
+              Results-oriented software and cybersecurity professional
+            </motion.h2>
+            <motion.p 
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-neutral-400 text-lg leading-relaxed mb-6"
+            >
+              I have hands-on experience building and deploying solutions that improve security posture, automate workflows, and reduce operational risk. My work is grounded in real-world application — from national cybersecurity competitions to open-source development focused on practical, business-driven outcomes.
+            </motion.p>
+            <motion.div 
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="flex flex-wrap gap-3 mt-8"
+            >
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Open Source Contributor</span>
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Competition-Tested</span>
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Production-Ready Code</span>
+            </motion.div>
+          </motion.div>
+          
+          <motion.div 
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+            className="space-y-6"
+          >
+            {professionalStrengths.map((strength, i) => (
+              <motion.div 
+                key={strength.title}
+                variants={prefersReducedMotion ? undefined : staggerItem}
+                className="flex gap-4 items-start p-4 bg-neutral-800/50 border border-neutral-700"
+              >
+                <strength.icon className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="text-lg font-medium mb-1">{strength.title}</h4>
+                  <p className="text-sm text-neutral-400">{strength.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════════════════
+          TECHNICAL SKILLS
           ═══════════════════════════════════════════════════════ */}
       <motion.section 
         initial={prefersReducedMotion ? false : "hidden"}
@@ -133,7 +225,6 @@ export default function Home() {
         variants={sectionVariants}
         className="py-24 md:py-32 px-6 relative"
       >
-        {/* Geometric anchor - horizontal line extends on entry */}
         <motion.div 
           variants={prefersReducedMotion ? undefined : horizontalLineVariants}
           className="absolute top-24 left-0 w-1/4 h-px bg-primary/30 origin-left"
@@ -141,8 +232,74 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
-            title="SELECTED WORKS" 
-            subtitle="A curation of projects that define my approach to digital problem solving."
+            title="TECHNICAL EXPERTISE" 
+            subtitle="Core technologies and professional skills driving business-focused engineering."
+          />
+          
+          <motion.div 
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+            className="grid grid-cols-3 md:grid-cols-6 gap-6 mb-16"
+          >
+            {technicalSkills.map((skill) => (
+              <motion.div 
+                key={skill.name}
+                variants={prefersReducedMotion ? undefined : staggerItem}
+                className="flex flex-col items-center gap-3 p-6 border border-border bg-card transition-colors hover:border-primary/50"
+              >
+                <skill.icon className="w-8 h-8 text-muted-foreground" />
+                <span className="text-sm font-medium text-center">{skill.name}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            <motion.div variants={prefersReducedMotion ? undefined : staggerItem} className="p-6 border border-border bg-card">
+              <h3 className="text-lg font-display font-medium mb-4">Core Technical Skills</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Programming: JavaScript, Python, Node.js, HTML/CSS</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Frameworks: React, Express, Next.js</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> DevOps: CI/CD pipelines, automation</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Cybersecurity: Penetration testing, ethical hacking</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Tools: Git, Docker, VS Code</li>
+              </ul>
+            </motion.div>
+            <motion.div variants={prefersReducedMotion ? undefined : staggerItem} className="p-6 border border-border bg-card">
+              <h3 className="text-lg font-display font-medium mb-4">Professional Strengths</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Business-focused engineering decisions</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Risk-driven security analysis</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Clear documentation and reporting</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Cross-team collaboration</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Continuous learning and systems thinking</li>
+              </ul>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════════════════
+          PROJECTS SECTION
+          ═══════════════════════════════════════════════════════ */}
+      <motion.section 
+        initial={prefersReducedMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={sectionVariants}
+        className="py-24 md:py-32 px-6 bg-muted/30 relative"
+      >
+        <div className="max-w-7xl mx-auto">
+          <SectionHeader 
+            title="FEATURED PROJECTS" 
+            subtitle="Solutions designed to solve real problems and deliver measurable business impact."
           />
           
           <motion.div 
@@ -185,100 +342,7 @@ export default function Home() {
       </motion.section>
 
       {/* ═══════════════════════════════════════════════════════
-          PHILOSOPHY / ABOUT SECTION
-          Inverted colors, editorial spread layout
-          ═══════════════════════════════════════════════════════ */}
-      <motion.section 
-        initial={prefersReducedMotion ? false : "hidden"}
-        whileInView="visible"
-        viewport={viewportConfig}
-        variants={sectionVariants}
-        className="py-24 bg-foreground text-background px-6 relative overflow-hidden"
-      >
-        {/* Geometric backdrop - rectangular plane with entry animation */}
-        <motion.div 
-          initial={prefersReducedMotion ? false : { x: -100, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 0.1 }}
-          transition={{ duration: duration.slow, ease: [0.4, 0.0, 0.2, 1] }}
-          viewport={viewportOnceConfig}
-          className="absolute top-0 left-0 w-1/3 h-full bg-background/10"
-        />
-        
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
-          <motion.div
-            variants={prefersReducedMotion ? undefined : staggerContainer}
-            initial={prefersReducedMotion ? false : "hidden"}
-            whileInView="visible"
-            viewport={viewportOnceConfig}
-          >
-            <motion.span 
-              variants={prefersReducedMotion ? undefined : staggerItem}
-              className="text-primary text-xs font-mono mb-4 block uppercase tracking-widest"
-            >
-              Philosophy
-            </motion.span>
-            <motion.h2 
-              variants={prefersReducedMotion ? undefined : staggerItem}
-              className="text-4xl md:text-5xl font-display leading-tight mb-8"
-            >
-              Design is not just what it looks like and feels like. Design is how it works.
-            </motion.h2>
-            <motion.p 
-              variants={prefersReducedMotion ? undefined : staggerItem}
-              className="text-neutral-400 text-lg leading-relaxed mb-6"
-            >
-              I believe in subtracting the obvious and adding the meaningful. Every pixel should serve a purpose, every interaction should feel inevitable.
-            </motion.p>
-            <motion.div 
-              variants={prefersReducedMotion ? undefined : staggerItem}
-              className="grid grid-cols-2 gap-8 mt-12"
-            >
-              <div>
-                <h4 className="text-3xl font-display mb-2">5+</h4>
-                <p className="text-sm text-neutral-500">Years Experience</p>
-              </div>
-              <div>
-                <h4 className="text-3xl font-display mb-2">50+</h4>
-                <p className="text-sm text-neutral-500">Projects Delivered</p>
-              </div>
-            </motion.div>
-          </motion.div>
-          
-          {/* Geometric representation - deterministic stagger, no randomization */}
-          <motion.div 
-            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: duration.slow, ease: [0.4, 0.0, 0.2, 1] }}
-            viewport={viewportOnceConfig}
-            className="relative aspect-square md:aspect-[4/5] bg-neutral-800 overflow-hidden"
-          >
-            {/* Abstract grid structure - fixed stagger pattern, no randomization */}
-            <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 gap-px">
-              {Array(64).fill(0).map((_, i) => {
-                const row = Math.floor(i / 8);
-                const col = i % 8;
-                const opacityValue = 0.1 + ((row + col) % 5) * 0.04;
-                return (
-                  <div 
-                    key={i} 
-                    className="bg-neutral-600"
-                    style={{ opacity: opacityValue }}
-                  />
-                );
-              })}
-            </div>
-            
-            {/* Overlapping geometric forms */}
-            <div className="absolute top-8 left-8 w-1/2 h-1/2 border border-neutral-600" />
-            <div className="absolute bottom-8 right-8 w-1/3 h-1/3 bg-primary/20" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border border-neutral-500" />
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ═══════════════════════════════════════════════════════
-          INSIGHTS / BLOG SECTION
-          Clean cards with staggered entry
+          CYBERSECURITY EXPERIENCE
           ═══════════════════════════════════════════════════════ */}
       <motion.section 
         initial={prefersReducedMotion ? false : "hidden"}
@@ -287,16 +351,55 @@ export default function Home() {
         variants={sectionVariants}
         className="py-24 md:py-32 px-6 relative"
       >
-        {/* Geometric anchor */}
         <motion.div 
           variants={prefersReducedMotion ? undefined : horizontalLineVariants}
-          className="absolute top-24 right-0 w-1/3 h-px bg-border origin-right"
+          className="absolute top-24 right-0 w-1/4 h-px bg-primary/30 origin-right"
         />
         
         <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="text-primary text-xs font-mono mb-4 block uppercase tracking-widest">
+                Applied Security
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display leading-tight mb-6">
+                Real-World Cybersecurity Experience
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                Participated in real-world penetration testing and ethical hacking scenarios using industry-standard methodologies to identify and remediate vulnerabilities.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                This experience demonstrates applied security thinking, structured reporting, and teamwork under pressure — directly transferable to enterprise security and engineering environments.
+              </p>
+            </div>
+            <div className="relative aspect-square bg-muted/50 overflow-hidden border border-border">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Shield className="w-24 h-24 text-primary/20" />
+              </div>
+              <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-px opacity-30">
+                {Array(36).fill(0).map((_, i) => (
+                  <div key={i} className="bg-muted-foreground/10" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════════════════
+          INSIGHTS / BLOG SECTION
+          ═══════════════════════════════════════════════════════ */}
+      <motion.section 
+        initial={prefersReducedMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={sectionVariants}
+        className="py-24 md:py-32 px-6 bg-muted/30 relative"
+      >
+        <div className="max-w-7xl mx-auto">
           <SectionHeader 
             title="INSIGHTS" 
-            subtitle="Thoughts on technology, design systems, and the future of the web."
+            subtitle="Technical articles and thoughts on software engineering, security, and best practices."
           />
           
           <motion.div 
@@ -306,7 +409,7 @@ export default function Home() {
             viewport={viewportOnceConfig}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            {latestPosts.map((post, i) => (
+            {latestPosts.map((post) => (
               <motion.article 
                 key={post.id}
                 variants={prefersReducedMotion ? undefined : staggerItem}
@@ -327,12 +430,64 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm line-clamp-3 leading-relaxed">
                   {post.summary || post.content.substring(0, 100) + "..."}
                 </p>
-                
-                {/* Subtle line that extends on hover */}
                 <div className="mt-4 h-px bg-border w-0 group-hover:w-full transition-all duration-300" />
               </motion.article>
             ))}
           </motion.div>
+
+          <motion.div 
+            variants={prefersReducedMotion ? undefined : fadeUpStaggerVariants}
+            custom={4}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+            className="mt-12 text-center md:text-left"
+          >
+            <Link 
+              href="/posts" 
+              className="inline-flex items-center gap-2 text-foreground font-medium transition-opacity duration-200 hover:opacity-70"
+              data-testid="link-all-posts"
+            >
+              View All Articles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════════════════
+          CONTACT CTA
+          ═══════════════════════════════════════════════════════ */}
+      <motion.section 
+        initial={prefersReducedMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={sectionVariants}
+        className="py-24 md:py-32 px-6 relative"
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-display font-medium mb-6">
+            Let's Build Something Together
+          </h2>
+          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
+            Whether you need a secure software solution, technical consultation, or want to discuss opportunities, I'm ready to deliver results.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link 
+              href="/contact" 
+              className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-background font-medium text-sm transition-opacity duration-200 hover:opacity-80"
+              data-testid="link-contact-cta"
+            >
+              Get In Touch <Mail className="w-4 h-4" />
+            </Link>
+            <a 
+              href="https://github.com/datadave22"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-4 border border-border text-foreground font-medium text-sm transition-colors duration-200 hover:border-foreground"
+            >
+              <Github className="w-4 h-4" /> GitHub
+            </a>
+          </div>
         </div>
       </motion.section>
     </div>

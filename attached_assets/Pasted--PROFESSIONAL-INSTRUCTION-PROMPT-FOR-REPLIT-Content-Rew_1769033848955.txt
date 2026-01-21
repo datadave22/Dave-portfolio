@@ -1,0 +1,163 @@
+🚀 PROFESSIONAL INSTRUCTION PROMPT FOR REPLIT
+(Content Rewrite + Intro Animation Update)
+
+📌 OVERALL GOAL
+Rewrite and restructure the current site (https://elite-designer--dave78234578.replit.app/) into a polished, professional technology and cybersecurity portfolio. The site should clearly communicate value, measurable impact, and real-world expertise using modern professional language suitable for hiring managers and technical leadership.
+
+In addition, redesign the intro animation to serve as a generative, mathematically inspired visual experience that reinforces technical sophistication, systems thinking, and intentional design.
+
+────────────────────────────────────────
+0. INTRO ANIMATION / HERO THEME (NEW)
+────────────────────────────────────────
+
+HIGH-LEVEL CONCEPT:
+Replace the current intro animation with a calm, immersive, generative visualization inspired by a black hole / event horizon.
+
+The animation should:
+- Feel mathematical, intentional, and infinite
+- Use hundreds to thousands of shapes or particles
+- Appear as if shapes/light are being slowly pulled into a central singularity
+- Be meditative and watchable, encouraging the user to pause before scrolling
+
+VISUAL REQUIREMENTS:
+- Central event-horizon / black-hole focal point
+- Shapes (circles, lines, polygons, particles, or abstract geometry) originate from the outer edges and are pulled inward
+- Subtle golden-ratio–inspired gradient color transitions (gold, amber, muted blues/purples)
+- Smooth, slow motion (no jitter or chaos)
+- Illusion of depth (z-axis scaling, opacity, or blur)
+
+MATHEMATICAL / GENERATIVE BEHAVIOR:
+Use parametric motion inspired by:
+
+x = r1 * cos(theta1 + rho1)
+y = r2 * sin(theta2 + rho2)
+z = r3 * cos(theta3 + rho3)
+
+Implementation guidance:
+- Randomize r, theta, and rho per particle
+- Each site visit should generate a unique parameter seed
+- Motion should evolve continuously to create a non-repeating, infinite flow
+- Z-depth should influence scale, opacity, or motion speed
+
+USER INTERACTION:
+- Animation is visible immediately on page load
+- Users can sit and watch indefinitely
+- Scrolling reveals site content
+- Scrolling back to the top resumes the animation (do not reset unless page reloads)
+- Optimize performance (requestAnimationFrame; Canvas/WebGL preferred)
+
+TECHNICAL SUGGESTIONS (NOT MANDATORY):
+- HTML Canvas, Three.js, or lightweight WebGL
+- Deterministic random seed per session
+- Responsive and mobile-safe (reduce particle count on small devices)
+
+────────────────────────────────────────
+1. HOMEPAGE / HERO CONTENT
+────────────────────────────────────────
+
+Overlay minimal, readable text on top of the animation.
+
+Replace existing content with:
+
+David J. Johnson — Technology & Cybersecurity Professional
+
+Strategic problem-solver specializing in software development, cybersecurity research, and automation solutions that increase operational efficiency and reduce risk. Proven ability to apply real-world security methodologies, develop secure systems, and deliver solutions aligned with business objectives.
+
+Include:
+- Professional Headline:
+  “Software Developer | Cybersecurity Analyst | Technical Problem Solver”
+- Short Value Statement:
+  “I build robust software systems, perform data-driven security assessments, and deliver measurable business impact.”
+- Call-to-Action Buttons:
+  Projects | GitHub | Resume / LinkedIn | Contact
+
+────────────────────────────────────────
+2. ABOUT / PROFESSIONAL SUMMARY
+────────────────────────────────────────
+
+Replace existing copy with:
+
+I am a results-oriented software and cybersecurity professional with hands-on experience building and deploying solutions that improve security posture, automate workflows, and reduce operational risk. My work is grounded in real-world application — from national cybersecurity competitions to open-source development focused on practical, business-driven outcomes.
+
+SKILLS TO EMPHASIZE:
+- Full Stack Development (Front & Back End)
+- Cybersecurity & Ethical Hacking
+- Secure System Design & Risk Analysis
+- Automation & DevOps Practices
+- Technical Research & Documentation
+- Problem Solving & Client Communication
+
+────────────────────────────────────────
+3. PROFESSIONAL SKILLS / EXPERTISE
+────────────────────────────────────────
+
+CORE TECHNICAL SKILLS:
+- Programming: JavaScript, Python, Node.js, HTML/CSS
+- Frameworks: React, Express, Next.js
+- DevOps: CI/CD pipelines, automation
+- Cybersecurity: Penetration testing, ethical hacking, network defense
+- Tools: Git, Docker, VS Code
+
+PROFESSIONAL STRENGTHS:
+- Business-focused engineering decisions
+- Risk-driven security analysis
+- Clear documentation and reporting
+- Cross-team collaboration
+- Continuous learning and systems thinking
+
+────────────────────────────────────────
+4. PROJECTS / PORTFOLIO
+────────────────────────────────────────
+
+Use GitHub repositories as primary sources:
+- https://github.com/datadave22
+- https://github.com/DaveBeCoding
+
+For each featured project include:
+- Project Title
+- Problem Addressed
+- Business or Operational Impact
+- Technologies Used
+- GitHub Link
+- Quantified or practical outcome where possible
+
+FORMAT EXAMPLE:
+
+Project: [Repo Name]
+Designed and implemented a secure automation tool that reduced manual configuration time by X%. Built using JavaScript, Node.js, Express, and REST APIs.
+GitHub: [Repo URL]
+
+────────────────────────────────────────
+5. CYBERSECURITY CONTEXT & RELEVANCE
+────────────────────────────────────────
+
+Frame cybersecurity competition and academic experience as applied, real-world skill:
+
+Participated in real-world penetration testing and ethical hacking scenarios using industry-standard methodologies to identify and remediate vulnerabilities. This experience demonstrates applied security thinking, structured reporting, and teamwork under pressure — directly transferable to enterprise security and engineering environments.
+
+────────────────────────────────────────
+6. PROFESSIONAL NARRATIVE FLOW
+────────────────────────────────────────
+
+1. Immersive Intro Animation
+2. Hero Value Statement
+3. Professional Summary
+4. Core Competencies
+5. Featured Projects
+6. Cybersecurity Experience
+7. Contact / Connect
+
+────────────────────────────────────────
+7. LANGUAGE & TONE GUIDELINES
+────────────────────────────────────────
+
+- Use active voice (“Designed”, “Developed”, “Delivered”)
+- Emphasize business impact over buzzwords
+- Maintain confident, modern professional tone
+- No filler text or incoherent copy
+
+────────────────────────────────────────
+8. END GOAL
+────────────────────────────────────────
+
+Update the existing website so it reflects a polished, modern technology professional brand. The intro animation should demonstrate technical depth and systems thinking, while the written content communicates business value, real-world impact, and professional credibility. All sections should flow logically and support hiring or client conversion.

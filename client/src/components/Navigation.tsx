@@ -16,7 +16,7 @@ export function Navigation() {
     <nav className="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="text-xl font-display font-bold tracking-tighter">
-          PORTFOLIO<span className="text-primary">.</span>
+          DJJ<span className="text-primary">.</span>
         </Link>
 
         <div className="hidden md:flex gap-8">

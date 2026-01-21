@@ -2,18 +2,24 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 
-interface Shape {
+interface Particle {
   x: number;
   y: number;
-  vx: number;
-  vy: number;
+  z: number;
+  r1: number;
+  r2: number;
+  r3: number;
+  theta1: number;
+  theta2: number;
+  theta3: number;
+  rho1: number;
+  rho2: number;
+  rho3: number;
+  speed: number;
   size: number;
-  type: "triangle" | "circle" | "square" | "angle";
-  rotation: number;
-  rotationSpeed: number;
   opacity: number;
-  color: string;
-  angleValue?: number;
+  hue: number;
+  type: "circle" | "line" | "polygon";
 }
 
 interface BlackHoleIntroProps {
@@ -23,8 +29,10 @@ interface BlackHoleIntroProps {
 export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const shapesRef = useRef<Shape[]>([]);
+  const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number>(0);
+  const timeRef = useRef<number>(0);
+  const seedRef = useRef<number>(Math.random() * 10000);
   const [isVisible, setIsVisible] = useState(true);
   const hasStartedFadeOut = useRef(false);
   const prefersReducedMotion = useReducedMotion();
@@ -46,9 +54,7 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      const timer = setTimeout(() => {
-        fadeOut();
-      }, 500);
+      const timer = setTimeout(() => fadeOut(), 500);
       return () => clearTimeout(timer);
     }
 
@@ -67,199 +73,174 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
     canvas.width = width;
     canvas.height = height;
 
-    const colors = [
-      "rgba(255, 255, 255, 0.8)",
-      "rgba(200, 200, 200, 0.7)",
-      "rgba(150, 150, 150, 0.6)",
-      "rgba(100, 100, 100, 0.5)",
-    ];
+    const seed = seedRef.current;
+    const seededRandom = (offset: number) => {
+      const x = Math.sin(seed + offset) * 10000;
+      return x - Math.floor(x);
+    };
 
-    const shapeTypes: Shape["type"][] = ["triangle", "circle", "square", "angle"];
+    const goldenRatio = 1.618033988749;
+    const isMobile = width < 768;
+    const numParticles = isMobile ? 400 : 800;
 
-    const createShape = (forceOutside = false): Shape => {
-      let x: number, y: number;
-
-      if (forceOutside) {
-        const side = Math.floor(Math.random() * 4);
-        const margin = 100;
-        switch (side) {
-          case 0: x = Math.random() * width; y = -margin; break;
-          case 1: x = width + margin; y = Math.random() * height; break;
-          case 2: x = Math.random() * width; y = height + margin; break;
-          default: x = -margin; y = Math.random() * height; break;
-        }
-      } else {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 200 + Math.random() * Math.max(width, height) * 0.5;
-        x = centerX + Math.cos(angle) * distance;
-        y = centerY + Math.sin(angle) * distance;
-      }
-
-      const type = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-
+    const createParticle = (index: number): Particle => {
+      const maxRadius = Math.max(width, height) * 0.8;
+      
       return {
-        x,
-        y,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2,
-        size: 8 + Math.random() * 24,
-        type,
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.05,
-        opacity: 0.3 + Math.random() * 0.7,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        angleValue: type === "angle" ? 1 + Math.floor(Math.random() * 10) : undefined,
+        x: 0,
+        y: 0,
+        z: seededRandom(index * 0.1) * 1000,
+        r1: 150 + seededRandom(index * 0.2) * maxRadius,
+        r2: 150 + seededRandom(index * 0.3) * maxRadius,
+        r3: 100 + seededRandom(index * 0.4) * 500,
+        theta1: seededRandom(index * 0.5) * Math.PI * 2,
+        theta2: seededRandom(index * 0.6) * Math.PI * 2,
+        theta3: seededRandom(index * 0.7) * Math.PI * 2,
+        rho1: seededRandom(index * 0.8) * Math.PI * 2,
+        rho2: seededRandom(index * 0.9) * Math.PI * 2,
+        rho3: seededRandom(index * 1.0) * Math.PI * 2,
+        speed: 0.0002 + seededRandom(index * 1.1) * 0.0008,
+        size: 1 + seededRandom(index * 1.2) * 3,
+        opacity: 0.3 + seededRandom(index * 1.3) * 0.7,
+        hue: seededRandom(index * 1.4),
+        type: ["circle", "line", "polygon"][Math.floor(seededRandom(index * 1.5) * 3)] as Particle["type"],
       };
     };
 
-    const numShapes = 60;
-    shapesRef.current = Array.from({ length: numShapes }, () => createShape());
+    particlesRef.current = Array.from({ length: numParticles }, (_, i) => createParticle(i));
 
-    const blackHoleRadius = 40;
-    const eventHorizonRadius = 80;
-    const gravitationalRange = Math.max(width, height) * 0.8;
-    const gravitationalStrength = 0.00015;
+    const getColor = (hue: number, opacity: number, zDepth: number) => {
+      const normalizedZ = Math.max(0, Math.min(1, zDepth / 1000));
+      const adjustedOpacity = opacity * (0.3 + normalizedZ * 0.7);
+      
+      if (hue < 0.4) {
+        const h = 35 + hue * 20;
+        return `hsla(${h}, 70%, 55%, ${adjustedOpacity})`;
+      } else if (hue < 0.7) {
+        const h = 220 + (hue - 0.4) * 60;
+        return `hsla(${h}, 40%, 45%, ${adjustedOpacity})`;
+      } else {
+        const h = 280 + (hue - 0.7) * 40;
+        return `hsla(${h}, 30%, 40%, ${adjustedOpacity})`;
+      }
+    };
 
-    const drawBlackHole = () => {
+    const drawEventHorizon = () => {
+      const maxRadius = Math.min(width, height) * 0.35;
+      
       const gradient = ctx.createRadialGradient(
         centerX, centerY, 0,
-        centerX, centerY, eventHorizonRadius * 3
+        centerX, centerY, maxRadius
       );
       gradient.addColorStop(0, "rgba(0, 0, 0, 1)");
-      gradient.addColorStop(0.3, "rgba(0, 0, 0, 0.95)");
-      gradient.addColorStop(0.5, "rgba(20, 20, 30, 0.6)");
-      gradient.addColorStop(0.7, "rgba(40, 40, 60, 0.3)");
+      gradient.addColorStop(0.15, "rgba(0, 0, 0, 0.98)");
+      gradient.addColorStop(0.3, "rgba(10, 10, 15, 0.9)");
+      gradient.addColorStop(0.5, "rgba(20, 15, 25, 0.6)");
+      gradient.addColorStop(0.7, "rgba(30, 25, 35, 0.3)");
+      gradient.addColorStop(0.85, "rgba(20, 20, 25, 0.1)");
       gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
       ctx.beginPath();
-      ctx.arc(centerX, centerY, eventHorizonRadius * 3, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
       ctx.fill();
 
+      const innerRadius = 30;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, blackHoleRadius, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
       ctx.fillStyle = "rgba(0, 0, 0, 1)";
       ctx.fill();
 
+      const t = timeRef.current * 0.0003;
+      const glowRadius = innerRadius * 1.8;
       const glowGradient = ctx.createRadialGradient(
-        centerX, centerY, blackHoleRadius * 0.8,
-        centerX, centerY, blackHoleRadius * 1.5
+        centerX, centerY, innerRadius * 0.9,
+        centerX, centerY, glowRadius
       );
-      glowGradient.addColorStop(0, "rgba(60, 60, 80, 0)");
-      glowGradient.addColorStop(0.5, "rgba(80, 80, 120, 0.15)");
-      glowGradient.addColorStop(1, "rgba(60, 60, 80, 0)");
+      const glowOpacity = 0.08 + Math.sin(t) * 0.03;
+      glowGradient.addColorStop(0, `rgba(180, 140, 80, 0)`);
+      glowGradient.addColorStop(0.5, `rgba(180, 140, 80, ${glowOpacity})`);
+      glowGradient.addColorStop(1, `rgba(180, 140, 80, 0)`);
 
       ctx.beginPath();
-      ctx.arc(centerX, centerY, blackHoleRadius * 1.5, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, glowRadius, 0, Math.PI * 2);
       ctx.fillStyle = glowGradient;
       ctx.fill();
     };
 
-    const drawShape = (shape: Shape) => {
+    const drawParticle = (p: Particle, t: number) => {
+      const pullFactor = 1 - Math.min(1, t * p.speed * 0.5);
+      const currentR1 = p.r1 * pullFactor;
+      const currentR2 = p.r2 * pullFactor;
+      const currentR3 = p.r3 * pullFactor;
+
+      const x = centerX + currentR1 * Math.cos(p.theta1 + p.rho1 + t * p.speed);
+      const y = centerY + currentR2 * Math.sin(p.theta2 + p.rho2 + t * p.speed * goldenRatio);
+      const z = currentR3 * Math.cos(p.theta3 + p.rho3 + t * p.speed * 0.5);
+
+      const normalizedZ = (z + 500) / 1000;
+      const scale = 0.3 + normalizedZ * 0.7;
+      const adjustedSize = p.size * scale;
+
+      const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+      const minDistance = 35;
+      if (distanceFromCenter < minDistance) return;
+
+      const proximityFade = Math.min(1, (distanceFromCenter - minDistance) / 100);
+      const color = getColor(p.hue, p.opacity * proximityFade, z + 500);
+
       ctx.save();
-      ctx.translate(shape.x, shape.y);
-      ctx.rotate(shape.rotation);
-      ctx.globalAlpha = shape.opacity;
+      ctx.globalAlpha = proximityFade;
 
-      const colorWithOpacity = shape.color.replace(/[\d.]+\)$/, `${shape.opacity})`);
-      ctx.strokeStyle = colorWithOpacity;
-      ctx.fillStyle = "transparent";
-      ctx.lineWidth = 1.5;
-
-      switch (shape.type) {
-        case "triangle":
-          ctx.beginPath();
-          ctx.moveTo(0, -shape.size / 2);
-          ctx.lineTo(-shape.size / 2, shape.size / 2);
-          ctx.lineTo(shape.size / 2, shape.size / 2);
-          ctx.closePath();
-          ctx.stroke();
-          break;
-
+      switch (p.type) {
         case "circle":
           ctx.beginPath();
-          ctx.arc(0, 0, shape.size / 2, 0, Math.PI * 2);
-          ctx.stroke();
+          ctx.arc(x, y, adjustedSize, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.fill();
           break;
 
-        case "square":
-          ctx.strokeRect(-shape.size / 2, -shape.size / 2, shape.size, shape.size);
-          break;
-
-        case "angle":
-          const angleRad = ((shape.angleValue || 5) / 10) * Math.PI;
+        case "line":
+          const angle = p.theta1 + t * p.speed * 2;
+          const length = adjustedSize * 4;
           ctx.beginPath();
-          ctx.moveTo(-shape.size / 2, 0);
-          ctx.lineTo(0, 0);
-          ctx.lineTo(Math.cos(angleRad) * shape.size / 2, -Math.sin(angleRad) * shape.size / 2);
+          ctx.moveTo(x - Math.cos(angle) * length / 2, y - Math.sin(angle) * length / 2);
+          ctx.lineTo(x + Math.cos(angle) * length / 2, y + Math.sin(angle) * length / 2);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = scale;
           ctx.stroke();
+          break;
 
-          ctx.font = `${Math.max(8, shape.size * 0.3)}px monospace`;
-          ctx.fillStyle = colorWithOpacity;
-          ctx.fillText(`${shape.angleValue}`, shape.size * 0.3, shape.size * 0.4);
+        case "polygon":
+          const sides = 3 + Math.floor(p.hue * 3);
+          ctx.beginPath();
+          for (let i = 0; i <= sides; i++) {
+            const a = (i / sides) * Math.PI * 2 + t * p.speed;
+            const px = x + Math.cos(a) * adjustedSize * 1.5;
+            const py = y + Math.sin(a) * adjustedSize * 1.5;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          }
+          ctx.closePath();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = scale * 0.8;
+          ctx.stroke();
           break;
       }
 
       ctx.restore();
     };
 
-    const updateShape = (shape: Shape): boolean => {
-      const dx = centerX - shape.x;
-      const dy = centerY - shape.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < blackHoleRadius) {
-        return false;
-      }
-
-      if (distance < gravitationalRange) {
-        const force = gravitationalStrength * (1 / (distance * distance)) * 10000;
-        const ax = (dx / distance) * force;
-        const ay = (dy / distance) * force;
-
-        shape.vx += ax;
-        shape.vy += ay;
-
-        if (distance < eventHorizonRadius * 2) {
-          shape.opacity *= 0.98;
-          shape.size *= 0.995;
-        }
-      }
-
-      const maxSpeed = 15;
-      const speed = Math.sqrt(shape.vx * shape.vx + shape.vy * shape.vy);
-      if (speed > maxSpeed) {
-        shape.vx = (shape.vx / speed) * maxSpeed;
-        shape.vy = (shape.vy / speed) * maxSpeed;
-      }
-
-      shape.x += shape.vx;
-      shape.y += shape.vy;
-      shape.rotation += shape.rotationSpeed;
-
-      if (distance < eventHorizonRadius * 1.5) {
-        shape.rotationSpeed *= 1.02;
-      }
-
-      return shape.opacity > 0.05 && shape.size > 2;
-    };
-
-    let lastSpawnTime = 0;
-    const spawnInterval = 200;
-
     const animate = (timestamp: number) => {
-      ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      timeRef.current = timestamp;
+
+      ctx.fillStyle = "rgba(5, 5, 8, 1)";
       ctx.fillRect(0, 0, width, height);
 
-      drawBlackHole();
+      const sortedParticles = [...particlesRef.current].sort((a, b) => a.z - b.z);
+      sortedParticles.forEach(p => drawParticle(p, timestamp));
 
-      shapesRef.current = shapesRef.current.filter(updateShape);
-      shapesRef.current.forEach(drawShape);
-
-      if (timestamp - lastSpawnTime > spawnInterval && shapesRef.current.length < numShapes) {
-        shapesRef.current.push(createShape(true));
-        lastSpawnTime = timestamp;
-      }
+      drawEventHorizon();
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
@@ -276,35 +257,20 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        fadeOut();
-      }
+      if (window.scrollY > 50) fadeOut();
     };
 
     const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0) {
-        fadeOut();
-      }
+      if (e.deltaY > 0) fadeOut();
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" || e.key === " " || e.key === "Enter") {
-        fadeOut();
-      }
-    };
-
-    const handleClick = () => {
-      fadeOut();
+      if (e.key === "Escape" || e.key === " " || e.key === "Enter") fadeOut();
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("wheel", handleWheel, { passive: true });
     window.addEventListener("keydown", handleKeyDown);
-    container.addEventListener("click", handleClick);
-
-    const autoFadeTimeout = setTimeout(() => {
-      fadeOut();
-    }, 6000);
 
     return () => {
       cancelAnimationFrame(animationFrameRef.current);
@@ -312,8 +278,6 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("keydown", handleKeyDown);
-      container.removeEventListener("click", handleClick);
-      clearTimeout(autoFadeTimeout);
     };
   }, [fadeOut, prefersReducedMotion]);
 
@@ -322,7 +286,7 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 bg-black cursor-pointer"
+      className="fixed inset-0 z-50 bg-[#050508]"
       style={{ touchAction: "none" }}
       data-testid="black-hole-intro"
     >
@@ -332,13 +296,17 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
         data-testid="black-hole-canvas"
       />
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-xs font-mono tracking-widest animate-pulse">
-        {prefersReducedMotion ? "LOADING..." : "SCROLL OR CLICK TO ENTER"}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-6">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight text-white mb-4">
+          David J. Johnson
+        </h1>
+        <p className="text-lg md:text-xl text-white/60 max-w-2xl font-light">
+          Technology & Cybersecurity Professional
+        </p>
       </div>
 
-      <div className="absolute top-8 right-8 text-white/20 text-xs font-mono">
-        <div className="w-8 h-px bg-white/20 mb-2" />
-        <span>EST. 2024</span>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-xs font-mono tracking-widest animate-pulse pointer-events-none">
+        {prefersReducedMotion ? "LOADING..." : "SCROLL TO ENTER"}
       </div>
     </div>
   );

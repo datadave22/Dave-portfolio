@@ -46,25 +46,28 @@ export default function Contact() {
         <div>
           <SectionHeader 
             title="GET IN TOUCH" 
-            subtitle="Available for freelance opportunities and consulting."
+            subtitle="Available for opportunities and technical consultation."
             className="mb-12"
           />
           
           <div className="space-y-8 text-lg text-muted-foreground">
             <p>
-              I am currently open to discussing new projects, design systems consulting, and technical leadership roles.
+              I am currently open to discussing software development projects, cybersecurity consulting, and engineering roles where I can deliver measurable impact.
             </p>
             <div>
-              <h4 className="text-foreground font-display font-medium mb-2">Email</h4>
-              <a href="mailto:hello@example.com" className="hover:text-primary transition-colors">hello@example.com</a>
+              <h4 className="text-foreground font-display font-medium mb-2">GitHub</h4>
+              <a 
+                href="https://github.com/datadave22" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                github.com/datadave22
+              </a>
             </div>
             <div>
-              <h4 className="text-foreground font-display font-medium mb-2">Social</h4>
-              <div className="flex flex-col gap-2">
-                <a href="#" className="hover:text-primary transition-colors">Twitter / X</a>
-                <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>
-                <a href="#" className="hover:text-primary transition-colors">GitHub</a>
-              </div>
+              <h4 className="text-foreground font-display font-medium mb-2">Location</h4>
+              <p>Available remotely, worldwide</p>
             </div>
           </div>
         </div>
