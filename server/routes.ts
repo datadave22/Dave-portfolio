@@ -3,6 +3,7 @@ import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import { getResendClient } from "./resend";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -42,6 +43,25 @@ export async function registerRoutes(
     try {
       const input = api.contact.submit.input.parse(req.body);
       await storage.createMessage(input);
+      
+      try {
+        const { client, fromEmail } = await getResendClient();
+        await client.emails.send({
+          from: fromEmail,
+          to: 'd86272796+portfolio@gmail.com',
+          subject: `New Contact Form Message from ${input.name}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${input.name}</p>
+            <p><strong>Email:</strong> ${input.email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${input.message.replace(/\n/g, '<br>')}</p>
+          `
+        });
+      } catch (emailError) {
+        console.error('Failed to send email notification:', emailError);
+      }
+      
       res.json({ success: true });
     } catch (err) {
       if (err instanceof z.ZodError) {

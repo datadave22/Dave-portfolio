@@ -17,12 +17,12 @@ The site includes:
 - **Blog/Insights** for technical articles
 - **Contact form** with resume link and GitHub
 
-## Email Configuration (TODO)
+## Email Configuration
 
-The contact form currently stores messages to the database. To enable email notifications:
-1. Set up Resend integration via Replit's integrations panel
-2. Or add `RESEND_API_KEY` secret and implement email sending in `server/routes.ts`
-3. Target email: d86272796+portfolio@gmail.com
+Contact form submissions now send email notifications via Resend integration:
+- Emails sent to: d86272796+portfolio@gmail.com
+- Messages also saved to PostgreSQL database as backup
+- Uses Replit's Resend connector (configured in `server/resend.ts`)
 
 ## User Preferences
 
