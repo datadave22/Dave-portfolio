@@ -28,8 +28,10 @@ Thumbs.db
 *.swp
 *.swo
 
-# Replit specific
+# Replit / local state (not needed in repo)
 .upm/
+.local/
+.replit
 vite.config.ts.*
 
 # Temp files
