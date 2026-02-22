@@ -19,10 +19,11 @@ The site includes:
 
 ## Email Configuration
 
-Contact form submissions now send email notifications via Resend integration:
+Contact form submissions send email notifications via Resend:
 - Emails sent to: d86272796+portfolio@gmail.com
 - Messages also saved to PostgreSQL database as backup
-- Uses Replit's Resend connector (configured in `server/resend.ts`)
+- Requires `RESEND_API_KEY` environment variable
+- Optional: `RESEND_FROM_EMAIL` (defaults to `onboarding@resend.dev` for testing; use a verified domain address in production)
 
 ## User Preferences
 
@@ -64,6 +65,7 @@ server/           # Express backend
   routes.ts       # API route handlers
   storage.ts      # Database access layer
   db.ts           # Database connection
+  resend.ts       # Email client (uses RESEND_API_KEY env var)
 shared/           # Code shared between client and server
   schema.ts       # Drizzle database schema
   routes.ts       # API route definitions with Zod validation
@@ -93,11 +95,20 @@ shared/           # Code shared between client and server
 - **react-hook-form / @hookform/resolvers**: Form handling
 - **zod**: Schema validation
 - **date-fns**: Date formatting
+- **resend**: Transactional email
 
 ### Development Tools
 - **Vite**: Frontend dev server and bundler
 - **tsx**: TypeScript execution for development
 - **drizzle-kit**: Database schema push via `npm run db:push`
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DATABASE_URL` | Yes | PostgreSQL connection string |
+| `RESEND_API_KEY` | Yes | Resend API key for contact form emails |
+| `RESEND_FROM_EMAIL` | No | Sender address (default: `onboarding@resend.dev`) |
 
 ## Collaboration & Workflow
 
@@ -145,23 +156,13 @@ VALUES (
 
 ### Running the Project
 
-- **Start**: The app runs via the "Start application" workflow (`npm run dev`)
+- **Start**: `npm run dev`
 - **Database sync**: `npm run db:push` applies schema changes
-- **Build**: Handled automatically by Replit when publishing
+- **Build**: `npm run build`
 
-### GitHub Integration
+### Deployment (Vercel)
 
-To connect this project to GitHub:
-1. Create a new repository on GitHub
-2. Go to Replit Settings → Git
-3. Connect your GitHub account
-4. Link to your repository
-
-For collaborative development with branches:
-1. Clone the repo locally or use GitHub Codespaces
-2. Create branches: `main` (production), `develop` (active work)
-3. Push changes, then sync back to Replit
-
-### Publishing
-
-The site is publish-ready. Use Replit's "Publish" button to deploy. The published version will be available at your `.replit.app` domain or a custom domain if configured.
+The site is deployed on Vercel. To deploy:
+1. Push to `main` branch — Vercel auto-deploys
+2. Set environment variables in Vercel dashboard: `DATABASE_URL`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`
+3. Custom domain configured at Vercel project settings
