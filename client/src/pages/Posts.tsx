@@ -10,8 +10,8 @@ export default function Posts() {
     <div className="min-h-screen pt-32 px-6 pb-20">
       <div className="max-w-4xl mx-auto">
         <SectionHeader 
-          title="JOURNAL" 
-          subtitle="Documentation of learning, failures, and discoveries."
+          title="WRITING"
+          subtitle="Technical articles on platform engineering, scale decisions, and systems thinking."
           className="mb-16"
         />
 

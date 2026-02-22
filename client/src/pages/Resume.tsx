@@ -12,49 +12,66 @@ export default function Resume() {
 
   const coreStrengths = [
     "CI/CD Automation & Pipeline Engineering",
-    "Linux Systems & Internals",
-    "HPC (CPU/GPU) Environments",
-    "Cloud & Container Platforms (AWS, Docker, Kubernetes)",
-    "Reproducible ML Infrastructure",
-    "Secure & Regulated Environments",
+    "HPC (CPU/GPU) Environments — MPI, CUDA, Trilinos",
+    "Linux Systems & Internals (RHEL, Ubuntu)",
+    "Container Platforms — Docker, Kubernetes",
+    "Embedded Systems & Firmware Security",
+    "Secure & Regulated Environments (DOE L-clearance)",
+    "Full-Stack SaaS — React, Node.js, PostgreSQL",
+    "Penetration Testing & Threat Modeling",
   ];
 
   const experience = [
     {
       company: "John Deere",
-      role: "Advanced R&D Lab — DevOps/MLOps Platform Engineer",
-      period: "2023 – Present",
+      role: "Advanced R&D — Software Engineer, Embedded Systems & Security",
+      period: "Dec 2023 – Present",
       highlights: [
-        "Built and maintained CI/CD pipelines for ML model deployment across hybrid cloud infrastructure",
-        "Automated infrastructure provisioning using Terraform and Ansible, reducing deployment time by 60%",
-        "Designed reproducible ML training environments using Docker and Kubernetes",
-        "Collaborated with data science teams to optimize GPU utilization for deep learning workloads",
+        "Firmware hardening and security analysis for embedded systems in agricultural and autonomous equipment",
+        "Threat modeling and vulnerability assessment across constrained embedded environments",
+        "Developed tooling to automate security validation workflows in the hardware bring-up pipeline",
+        "Cross-functional collaboration with hardware, firmware, and product security teams",
       ],
-      impact: "Reduced model deployment cycle from weeks to hours while maintaining security compliance.",
+      impact: "Strengthened security posture for embedded platforms operating in safety-critical, real-world deployments.",
     },
     {
-      company: "U.S. Department of Energy",
-      role: "National Laboratory — HPC Systems Engineer",
-      period: "2021 – 2023",
+      company: "Sandia National Laboratories",
+      role: "DevOps / MLOps Platform Engineer — Trilinos Project (DOE)",
+      period: "Jan 2022 – Nov 2023",
       highlights: [
-        "Managed high-performance computing clusters supporting scientific research applications",
-        "Implemented automated monitoring and alerting systems for critical infrastructure",
-        "Developed custom tooling for resource scheduling and workload optimization",
-        "Maintained compliance with federal security requirements (FedRAMP, NIST)",
+        "Owned CI/CD infrastructure for Trilinos — a 50+ package scientific software collection used on U.S. Top 500 supercomputers",
+        "Managed thousands of CMake/TriBITS build configurations across CUDA, MPI, and compiler matrix permutations",
+        "Debugged complex pipeline failures spanning Jenkins, GitHub Actions, and RHEL HPC cluster environments",
+        "Built reproducible ML infrastructure and GPU-accelerated build environments for research computing teams",
       ],
-      impact: "Improved cluster utilization by 35% through intelligent workload scheduling.",
+      impact: "Sustained CI reliability for a mission-critical open-source project under DOE L-clearance with zero tolerance for undetected regressions.",
     },
     {
-      company: "CyberPatriot / CPTC",
-      role: "Collegiate Penetration Testing Competition",
-      period: "2019 – 2021",
+      company: "CSUF — CPTC Team",
+      role: "Collegiate Penetration Testing Competition — National Competitor",
+      period: "Aug 2018 – Nov 2022",
       highlights: [
-        "Led team in realistic enterprise penetration testing scenarios",
-        "Performed vulnerability assessments and developed remediation strategies",
-        "Delivered professional security reports to simulated executive stakeholders",
-        "Placed in national competition finals demonstrating advanced offensive security skills",
+        "Placed Top 5 nationally in the 2021 CPTC — realistic enterprise penetration testing against simulated corporate infrastructure",
+        "Led web application exploitation, lateral movement, and privilege escalation phases",
+        "Delivered executive-facing reports with vulnerability findings, risk ratings, and remediation guidance",
+        "Also competed in CyberPatriot and multiple regional CTF events throughout undergraduate studies",
       ],
-      impact: "Developed real-world security assessment and reporting skills under competitive pressure.",
+      impact: "Developed applied offensive security skills and professional reporting under high-stakes competitive pressure.",
+    },
+  ];
+
+  const independentWork = [
+    {
+      project: "ResumePolish.io",
+      role: "Founder & Solo Engineer",
+      period: "2024 – Present",
+      description: "AI-powered resume analysis SaaS. Built full-stack from scratch: React frontend, Node.js/Express API, PostgreSQL, Stripe billing, and OpenAI integration. Designed the architecture to handle growth — deliberate choices on connection pooling, async job queues, and monolithic-vs-service boundaries before traffic warranted it.",
+    },
+    {
+      project: "Viral Clips",
+      role: "Founder & Solo Engineer",
+      period: "2024",
+      description: "Automated video content repurposing tool. ML pipeline for clip extraction and highlight detection. Explored unit economics and infrastructure costs at scale before deciding on build-vs-buy trade-offs for video processing.",
     },
   ];
 
@@ -72,7 +89,7 @@ export default function Resume() {
                 David Johnson
               </h1>
               <p className="text-xl text-muted-foreground">
-                Senior DevOps / MLOps Platform Engineer
+                Senior Platform Engineer — HPC · Embedded Systems · MLOps
               </p>
             </div>
             <a
@@ -101,12 +118,7 @@ export default function Resume() {
             Summary
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Results-driven platform engineer with expertise in building and scaling 
-            CI/CD infrastructure, managing high-performance computing environments, 
-            and implementing secure, reproducible ML pipelines. Proven track record 
-            of reducing deployment friction while maintaining compliance in regulated 
-            environments. Combines deep systems knowledge with practical security 
-            experience from competitive penetration testing.
+            Platform engineer with 7+ years spanning U.S. national labs, Fortune 500 R&D, and solo SaaS. At Sandia National Laboratories I owned CI/CD for Trilinos across thousands of build configurations on Top 500 supercomputers. At John Deere I work on embedded systems security for safety-critical equipment. Between those, I built and shipped ResumePolish.io from zero to production — solo. I design systems with scale trade-offs in mind before the traffic arrives: connection pooling, queue depth, service boundaries, and failure modes.
           </p>
         </motion.section>
 
@@ -190,6 +202,70 @@ export default function Resume() {
               </motion.div>
             ))}
           </motion.div>
+        </motion.section>
+
+        {/* Independent Work */}
+        <motion.section
+          initial={prefersReducedMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={viewportOnceConfig}
+          variants={sectionVariants}
+          className="mb-16"
+        >
+          <h2 className="text-xs font-mono text-primary uppercase tracking-widest mb-8">
+            Independent Work
+          </h2>
+          <motion.div
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+            className="space-y-6"
+          >
+            {independentWork.map((item) => (
+              <motion.div
+                key={item.project}
+                variants={prefersReducedMotion ? undefined : staggerItem}
+                className="relative pl-6 border-l-2 border-border"
+              >
+                <div className="absolute -left-[5px] top-0 w-2 h-2 bg-primary" />
+                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl font-display font-medium">{item.project}</h3>
+                    <p className="text-muted-foreground">{item.role}</p>
+                  </div>
+                  <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">
+                    {item.period}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.section>
+
+        {/* Education */}
+        <motion.section
+          initial={prefersReducedMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={viewportOnceConfig}
+          variants={sectionVariants}
+          className="mb-16"
+        >
+          <h2 className="text-xs font-mono text-primary uppercase tracking-widest mb-6">
+            Education
+          </h2>
+          <div className="relative pl-6 border-l-2 border-border">
+            <div className="absolute -left-[5px] top-0 w-2 h-2 bg-primary" />
+            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-2">
+              <div>
+                <h3 className="text-xl font-display font-medium">California State University, Fullerton</h3>
+                <p className="text-muted-foreground">B.S. Computer Science — GPA 3.5</p>
+              </div>
+              <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">2018 – 2022</span>
+            </div>
+            <p className="text-sm text-muted-foreground">CPTC team lead, CyberPatriot competitor, coursework in systems programming, algorithms, and computer security.</p>
+          </div>
         </motion.section>
 
         {/* Contact CTA */}

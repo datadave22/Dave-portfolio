@@ -301,7 +301,7 @@ export function BlackHoleIntro({ onComplete }: BlackHoleIntroProps) {
           David Johnson
         </h1>
         <p className="text-lg md:text-xl text-white/60 max-w-2xl font-light">
-          Technology & Cybersecurity Professional
+          Senior Platform Engineer — HPC · MLOps · Distributed Systems
         </p>
       </div>
 

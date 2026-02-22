@@ -3,8 +3,8 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Github, Mail, Code, Shield, Wrench, Users } from "lucide-react";
-import { SiJavascript, SiPython, SiReact, SiNodedotjs, SiDocker, SiGit } from "react-icons/si";
+import { ArrowRight, Github, Mail, Cpu, GitMerge, Database, Shield } from "lucide-react";
+import { SiPython, SiCplusplus, SiDocker, SiLinux, SiTypescript, SiGit } from "react-icons/si";
 import {
   sectionVariants,
   heroGeometryVariants,
@@ -27,19 +27,19 @@ export default function Home() {
   const latestPosts = posts?.slice(0, 3) || [];
 
   const technicalSkills = [
-    { icon: SiJavascript, name: "JavaScript" },
     { icon: SiPython, name: "Python" },
-    { icon: SiReact, name: "React" },
-    { icon: SiNodedotjs, name: "Node.js" },
+    { icon: SiCplusplus, name: "C++" },
+    { icon: SiTypescript, name: "TypeScript" },
     { icon: SiDocker, name: "Docker" },
+    { icon: SiLinux, name: "Linux" },
     { icon: SiGit, name: "Git" },
   ];
 
   const professionalStrengths = [
-    { icon: Code, title: "Full Stack Development", desc: "Front & Back End engineering with modern frameworks" },
-    { icon: Shield, title: "Cybersecurity", desc: "Penetration testing, ethical hacking, network defense" },
-    { icon: Wrench, title: "Automation & DevOps", desc: "CI/CD pipelines and workflow automation" },
-    { icon: Users, title: "Technical Communication", desc: "Clear documentation and cross-team collaboration" },
+    { icon: Cpu, title: "HPC & GPU Computing", desc: "CUDA-accelerated builds, MPI workflows, configuration matrices across thousands of build permutations on U.S. Top 500 supercomputers" },
+    { icon: GitMerge, title: "Platform Engineering & CI/CD", desc: "Trilinos, CMake/TriBITS, Jenkins, GitHub Actions — root-cause analysis on complex pipeline failures at national lab scale" },
+    { icon: Database, title: "Systems Design & Scale", desc: "Intentional trade-offs: monolith vs. microservices, connection pooling strategies, and architecture decisions before 100K-user problems arrive" },
+    { icon: Shield, title: "Security & Regulated Environments", desc: "DOE L-clearance, penetration testing, embedded firmware hardening, CPTC national competitor (Top 5, 2021)" },
   ];
 
   return (
@@ -75,7 +75,7 @@ export default function Home() {
             />
             
             <p className="text-primary text-sm font-mono uppercase tracking-widest mb-4">
-              Software Developer | Cybersecurity Analyst | Technical Problem Solver
+              Senior Platform Engineer — HPC · MLOps · Distributed Systems
             </p>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tighter leading-[0.95] text-balance mb-6">
@@ -92,10 +92,10 @@ export default function Home() {
           >
             <div className="md:col-span-6 md:col-start-7">
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light mb-6">
-                Strategic problem-solver specializing in software development, cybersecurity research, and automation solutions that increase operational efficiency and reduce risk.
+                7+ years building production infrastructure at DOE national labs and Fortune 500 R&D. CI/CD pipelines spanning thousands of build configurations, GPU-accelerated computing environments, and full-stack systems shipped to production.
               </p>
               <p className="text-base text-muted-foreground/80 leading-relaxed mb-8">
-                I build robust software systems, perform data-driven security assessments, and deliver measurable business impact.
+                From Trilinos on U.S. Top 500 supercomputers to AI-powered SaaS with live Stripe payments — I build systems that scale and make deliberate trade-offs before the traffic arrives.
               </p>
               
               <div className="flex flex-wrap gap-4 items-center">
@@ -173,21 +173,21 @@ export default function Home() {
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-3xl md:text-4xl font-display leading-tight mb-8"
             >
-              Results-oriented software and cybersecurity professional
+              Platform engineering at national-lab scale, SaaS in production
             </motion.h2>
             <motion.p 
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-neutral-400 text-lg leading-relaxed mb-6"
             >
-              I have hands-on experience building and deploying solutions that improve security posture, automate workflows, and reduce operational risk. My work is grounded in real-world application — from national cybersecurity competitions to open-source development focused on practical, business-driven outcomes.
+              I spent two years at Sandia National Laboratories owning CI/CD for the Trilinos scientific software collection — thousands of build configurations, GPU clusters, and U.S. Top 500 supercomputers. Since then I've shipped ResumePolish.io from zero to paying users, solo. I make deliberate trade-offs: monolith vs. microservices, connection pool sizing, queuing strategies — before scale becomes the emergency.
             </motion.p>
             <motion.div 
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="flex flex-wrap gap-3 mt-8"
             >
-              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Open Source Contributor</span>
-              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Competition-Tested</span>
-              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Production-Ready Code</span>
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Trilinos / Sandia Labs</span>
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">ResumePolish.io Founder</span>
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">CPTC National Top 5</span>
             </motion.div>
           </motion.div>
           
@@ -265,21 +265,21 @@ export default function Home() {
             <motion.div variants={prefersReducedMotion ? undefined : staggerItem} className="p-6 border border-border bg-card">
               <h3 className="text-lg font-display font-medium mb-4">Core Technical Skills</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Programming: JavaScript, Python, Node.js, HTML/CSS</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Frameworks: React, Express, Next.js</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> DevOps: CI/CD pipelines, automation</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Cybersecurity: Penetration testing, ethical hacking</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Tools: Git, Docker, VS Code</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Languages: Python, C++, TypeScript, Bash</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Infra: Docker, Kubernetes, Jenkins, GitHub Actions</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> HPC: MPI, CUDA, CMake/TriBITS, Trilinos</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Platforms: Linux (RHEL/Ubuntu), AWS, PostgreSQL</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Security: Penetration testing, CPTC, DOE L-clearance</li>
               </ul>
             </motion.div>
             <motion.div variants={prefersReducedMotion ? undefined : staggerItem} className="p-6 border border-border bg-card">
-              <h3 className="text-lg font-display font-medium mb-4">Professional Strengths</h3>
+              <h3 className="text-lg font-display font-medium mb-4">Engineering Approach</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Business-focused engineering decisions</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Risk-driven security analysis</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Clear documentation and reporting</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Cross-team collaboration</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Continuous learning and systems thinking</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Trade-off analysis before scale hits (100K+ user design)</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Monolith vs. microservices — right tool, right time</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Connection pooling, queue depth, and async patterns</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Failure mode analysis and root-cause debugging</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Solo SaaS → production (auth, billing, infra, observability)</li>
               </ul>
             </motion.div>
           </motion.div>
@@ -363,13 +363,13 @@ export default function Home() {
                 Applied Security
               </span>
               <h2 className="text-3xl md:text-4xl font-display leading-tight mb-6">
-                Real-World Cybersecurity Experience
+                CPTC National Top 5, 2021
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                Participated in real-world penetration testing and ethical hacking scenarios using industry-standard methodologies to identify and remediate vulnerabilities.
+                Competed in the Collegiate Penetration Testing Competition at CSUF — placed Top 5 nationally in 2021. Realistic enterprise engagement scenarios: web app exploitation, lateral movement, privilege escalation, and professional executive-facing reporting.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                This experience demonstrates applied security thinking, structured reporting, and teamwork under pressure — directly transferable to enterprise security and engineering environments.
+                Combined with a DOE L-clearance and embedded firmware work at John Deere, this isn't checkbox security — it's applied threat modeling and defense-in-depth across systems that matter.
               </p>
             </div>
             <div className="relative aspect-square bg-muted/50 overflow-hidden border border-border">
@@ -469,7 +469,7 @@ export default function Home() {
             Let's Build Something Together
           </h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Whether you need a secure software solution, technical consultation, or want to discuss opportunities, I'm ready to deliver results.
+            Open to senior platform, infrastructure, or ML engineer roles. Also available for fractional technical leadership and architecture consulting.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
