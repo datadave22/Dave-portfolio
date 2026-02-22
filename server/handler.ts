@@ -1,14 +1,12 @@
 /**
- * Vercel serverless function entry point.
- *
- * This file exports the Express app as a handler for Vercel.
- * It is NOT used for local development — `server/index.ts` is used locally.
- * Vercel automatically compiles this file and routes /api/* requests to it.
+ * Vercel serverless function handler.
+ * Bundled by script/build.ts into .vercel/output/functions/api.func/index.js
+ * NOT used for local development — server/index.ts is used locally.
  */
 
 import express, { type Request, Response, NextFunction } from "express";
 import { createServer } from "http";
-import { registerRoutes } from "../server/routes";
+import { registerRoutes } from "./routes";
 
 declare module "http" {
   interface IncomingMessage {
@@ -29,7 +27,7 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
-// Initialize routes once per container (lazy, cached across warm invocations)
+// Lazy-initialize routes once per container, cached across warm invocations
 let ready: Promise<void> | null = null;
 
 function ensureInitialized(): Promise<void> {
@@ -38,7 +36,7 @@ function ensureInitialized(): Promise<void> {
       app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
         const status = err.status || err.statusCode || 500;
         const message = err.message || "Internal Server Error";
-        console.error("Internal Server Error:", err);
+        console.error("Server error:", err);
         if (!res.headersSent) {
           res.status(status).json({ message });
         }

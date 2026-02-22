@@ -34,6 +34,9 @@ Thumbs.db
 .replit
 vite.config.ts.*
 
+# Vercel build output (generated at build time, not committed)
+.vercel/output/
+
 # Temp files
 tmp/
 temp/
