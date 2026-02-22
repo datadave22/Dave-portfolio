@@ -387,6 +387,104 @@ export default function Home() {
       </motion.section>
 
       {/* ═══════════════════════════════════════════════════════
+          RESUMEPOLISH CTA
+          ═══════════════════════════════════════════════════════ */}
+      <motion.section
+        initial={prefersReducedMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={sectionVariants}
+        className="py-24 md:py-32 px-6 bg-foreground text-background relative overflow-hidden"
+      >
+        <motion.div
+          initial={prefersReducedMotion ? false : { x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 0.07 }}
+          transition={{ duration: duration.slow }}
+          viewport={viewportOnceConfig}
+          className="absolute top-0 right-0 w-1/2 h-full bg-background/10 pointer-events-none"
+        />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+          <motion.div
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+          >
+            <motion.span
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-primary text-xs font-mono mb-4 block uppercase tracking-widest"
+            >
+              Built by this engineer
+            </motion.span>
+            <motion.h2
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-3xl md:text-4xl font-display leading-tight mb-6"
+            >
+              ResumePolish.io
+            </motion.h2>
+            <motion.p
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-neutral-400 text-lg leading-relaxed mb-4"
+            >
+              AI-powered resume optimization built and shipped solo. Upload your resume, select the role — get a professionally rewritten version in under 30 seconds.
+            </motion.p>
+            <motion.p
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="text-neutral-500 leading-relaxed mb-8"
+            >
+              Full-stack: React, Express, PostgreSQL, Stripe, GPT-4o. The architecture decisions behind it are documented in the Insights section.
+            </motion.p>
+            <motion.div
+              variants={prefersReducedMotion ? undefined : staggerItem}
+              className="flex flex-wrap gap-4"
+            >
+              <a
+                href="https://resumepolish.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background font-medium text-sm transition-opacity hover:opacity-80"
+              >
+                Try ResumePolish.io <ArrowRight className="w-4 h-4" />
+              </a>
+              <Link
+                href="/posts/monolith-over-microservices"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-700 text-neutral-300 font-medium text-sm transition-colors hover:border-neutral-400 hover:text-white"
+              >
+                Read the architecture post
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            variants={prefersReducedMotion ? undefined : staggerContainer}
+            initial={prefersReducedMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={viewportOnceConfig}
+            className="space-y-4"
+          >
+            {[
+              { label: "AI Engine", value: "GPT-4o — ATS keyword injection, Harvard-style formatting" },
+              { label: "Payments", value: "Stripe webhooks with HMAC-SHA256 — freemium + credit packs" },
+              { label: "Auth", value: "Clerk OAuth — Google, GitHub, email" },
+              { label: "Processing", value: "Serverless buffer-based PDF/DOCX parsing, no filesystem" },
+              { label: "Prompt versioning", value: "Atomic AI updates via SQL — no redeploy required" },
+            ].map((item) => (
+              <motion.div
+                key={item.label}
+                variants={prefersReducedMotion ? undefined : staggerItem}
+                className="flex gap-4 p-4 bg-neutral-800/40 border border-neutral-700"
+              >
+                <div>
+                  <span className="text-xs font-mono text-primary uppercase tracking-wider block mb-1">{item.label}</span>
+                  <span className="text-sm text-neutral-300">{item.value}</span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* ═══════════════════════════════════════════════════════
           INSIGHTS / BLOG SECTION
           ═══════════════════════════════════════════════════════ */}
       <motion.section 

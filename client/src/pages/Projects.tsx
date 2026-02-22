@@ -1,17 +1,20 @@
+import { useState } from "react";
 import { useProjects } from "@/hooks/use-content";
 import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectModal } from "@/components/ProjectModal";
 import { SectionHeader } from "@/components/SectionHeader";
-import { motion } from "framer-motion";
+import { type Project } from "@shared/schema";
 
 export default function Projects() {
   const { data: projects, isLoading } = useProjects();
+  const [selected, setSelected] = useState<Project | null>(null);
 
   return (
     <div className="min-h-screen pt-32 px-6 pb-20">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader 
-          title="WORK ARCHIVE" 
-          subtitle="A comprehensive list of selected commercial and personal projects."
+        <SectionHeader
+          title="WORK ARCHIVE"
+          subtitle="A comprehensive list of selected commercial and personal projects. Click any project for full details."
           className="mb-16"
         />
 
@@ -24,7 +27,12 @@ export default function Projects() {
             </div>
           ) : (
             projects?.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onClick={setSelected}
+              />
             ))
           )}
         </div>
@@ -35,6 +43,8 @@ export default function Projects() {
           </div>
         )}
       </div>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }

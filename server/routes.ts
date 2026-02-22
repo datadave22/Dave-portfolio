@@ -46,16 +46,40 @@ export async function registerRoutes(
       
       try {
         const { client, fromEmail } = await getResendClient();
+        const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'full', timeStyle: 'short' });
         await client.emails.send({
           from: fromEmail,
           to: 'd86272796+portfolio@gmail.com',
-          subject: `New Contact Form Message from ${input.name}`,
+          replyTo: input.email,
+          subject: `[davejohnson.io] New contact from ${input.name}`,
           html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${input.name}</p>
-            <p><strong>Email:</strong> ${input.email}</p>
-            <p><strong>Message:</strong></p>
-            <p>${input.message.replace(/\n/g, '<br>')}</p>
+            <!DOCTYPE html>
+            <html>
+            <body style="font-family: 'Courier New', monospace; background: #0a0a0a; color: #e5e5e5; padding: 40px; max-width: 600px; margin: 0 auto;">
+              <div style="border-left: 3px solid #22c55e; padding-left: 20px; margin-bottom: 32px;">
+                <p style="color: #22c55e; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 4px;">Source</p>
+                <p style="font-size: 18px; font-weight: 600; margin: 0;">davejohnson.io/contact</p>
+                <p style="color: #737373; font-size: 12px; margin: 4px 0 0;">${timestamp}</p>
+              </div>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #262626; color: #737373; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; width: 80px;">From</td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #262626; font-size: 15px;">${input.name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #262626; color: #737373; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">Reply To</td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #262626; font-size: 15px;"><a href="mailto:${input.email}" style="color: #22c55e; text-decoration: none;">${input.email}</a></td>
+                </tr>
+              </table>
+              <div style="margin-bottom: 8px;">
+                <p style="color: #737373; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 12px;">Message</p>
+                <div style="background: #111; border: 1px solid #262626; padding: 20px; line-height: 1.7; font-size: 15px; white-space: pre-wrap;">${input.message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+              </div>
+              <p style="color: #404040; font-size: 11px; margin-top: 32px; border-top: 1px solid #1a1a1a; padding-top: 16px;">
+                Hit reply to respond directly to ${input.name} — reply-to is set to their address.
+              </p>
+            </body>
+            </html>
           `
         });
       } catch (emailError) {
@@ -80,9 +104,12 @@ export async function registerRoutes(
 }
 
 async function seedDatabase() {
-  const existingPosts = await storage.getPosts();
-  if (existingPosts.length === 0) {
-    await storage.createPost({
+  const seedPost = async (post: Parameters<typeof storage.createPost>[0]) => {
+    const existing = await storage.getPost(post.slug);
+    if (!existing) await storage.createPost(post);
+  };
+
+  await seedPost({
       title: "Top 5 at Nationals: Competing in the 2021 Collegiate Penetration Testing Competition",
       slug: "cptc-2021-nationals",
       status: "published",
@@ -122,7 +149,7 @@ The competition also gave me direct exposure to the network and infrastructure c
 
 [CSUF News coverage of the 2021 CPTC qualifying run](https://news.fullerton.edu/2020/12/cybersecurity-students-secure-spot-in-national-competition/)`
     });
-    await storage.createPost({
+    await seedPost({
       title: "CI/CD at Scale: Managing Thousands of Build Configurations for the Trilinos HPC Framework",
       slug: "trilinos-cicd-at-scale",
       status: "published",
@@ -150,7 +177,7 @@ A subset of the failures were intermittent — infrastructure instability, resou
 
 The difference between managing CI for a typical software project and managing it for Trilinos is mostly about the cost of being wrong. When a configuration matrix has thousands of permutations and runs on supercomputers, wasted builds are expensive — in machine time, in developer time waiting for results, and in trust from the scientific computing community depending on your stability signals.`
     });
-    await storage.createPost({
+    await seedPost({
       title: "Building a Production SaaS Solo: Lessons from ResumePolish",
       slug: "building-resumepolish",
       status: "published",
@@ -174,7 +201,130 @@ Serverless functions have no persistent filesystem. I use multer with memoryStor
 
 Free users get standard optimization. Paid users get ATS keyword injection, Harvard-style formatting, and a Resume Strength Score. The differentiation is in the prompt, stored in the database with version numbers and an is_active boolean. New prompt versions can be activated with a single SQL UPDATE — no code deployment required.`
     });
-  }
+    await seedPost({
+      title: "Monolith Over Microservices: The Architecture Decision Behind ResumePolish",
+      slug: "monolith-over-microservices",
+      status: "published",
+      tags: ["Architecture", "SaaS", "Systems Design", "Production"],
+      summary: "Why I deliberately chose a monolith for ResumePolish when every blog post said otherwise — and the specific decision points that made microservices the wrong call at solo-developer scale.",
+      content: `Every modern architecture article points toward microservices. Separate services for auth, payments, file processing, AI calls. Independent scaling. Technology heterogeneity. When I started building ResumePolish, I read those articles and then deliberately went the other direction.
+
+Here's why — and the specific calculus behind it.
+
+## The Deployment Unit Problem
+
+Microservices promise independent deployability. In practice, for a solo developer shipping v1, that's a liability. Every feature that touches payments, file upload, and AI generation touches three services simultaneously. A schema change to the users table requires coordinating migrations across services that all read user state.
+
+With a monolith, a single deployment ships everything. Zero coordination overhead. When you're the only engineer, coordination overhead isn't theoretical — it's your entire afternoon.
+
+## Shared TypeScript Types: The Hidden Multiplier
+
+The biggest practical win from a monolith isn't deployment simplicity. It's type safety end-to-end.
+
+With a shared \`/shared\` directory, the same Zod schema that validates the POST /api/resume request on the server also types the frontend form. The same \`InsertUser\` type that Drizzle ORM uses for database writes is the type the React Query mutation expects on the client.
+
+In a microservices setup, you manage this with a shared types package or API contract tooling (OpenAPI, Protobuf, tRPC cross-service). That's non-trivial infrastructure. At ResumePolish scale — one developer, sub-1000 users at launch — it would have been the most expensive architectural decision with the smallest return.
+
+## The Scaling Argument Doesn't Hold Until It Does
+
+The common microservices pitch: "What if your AI processing needs to scale independently from your auth service?" Valid question. My answer: not yet.
+
+I designed for scale in the right places. The AI processing endpoint is stateless — it reads from DB, calls OpenAI, writes results back. It can be extracted into a standalone service later with a single refactor. The Stripe webhook handler is already effectively isolated — it's one Express route with an idempotency check. Extracting it means moving ~150 lines of code.
+
+The monolith buys me velocity now. The seams are clean enough that decomposition later is a real option, not a rewrite.
+
+## Where I Drew the Boundary
+
+Not everything is in the monolith. The file parsing (PDF, DOCX) runs in the same process on Vercel serverless. The OpenAI call is async but in-process. What I didn't do is put email delivery in-process — I call Resend externally as a fire-and-forget, because email delivery failure should never block a user's resume response.
+
+That's the practical version of "microservices thinking" applied correctly: extract only the parts that genuinely benefit from isolation, and have a real reason beyond "it could scale independently someday."
+
+## The Decision Framework
+
+When I advise on architecture now, the question I ask first is: what's the cost of being wrong? If the monolith gets too big, I decompose it — incremental, planned work. If the microservice architecture is wrong from day one, I'm rebuilding distributed infrastructure. The asymmetry of downside risk is what made the choice obvious.
+
+Build the monolith. Draw clean internal seams. Extract when the pain is real, not theoretical.`
+    });
+    await seedPost({
+      title: "The Algorithm Switch: Why I Replaced Pure Computer Vision with a Hybrid Model in Viral Clips",
+      slug: "viral-clips-algorithm-switch",
+      status: "published",
+      tags: ["Computer Vision", "Machine Learning", "Python", "Systems Engineering"],
+      summary: "I started Viral Clips with pure OpenCV — fast, cheap, deterministic. The false positive rate made it unusable. Here's the math behind the hybrid CV+AI model that got it to near-human accuracy at near-CV cost.",
+      content: `Viral Clips is a 7-stage pipeline that automatically extracts gaming highlights from raw footage. The core problem: given hours of raw gameplay, find the 30–90 second clips worth posting. I built the first version with pure computer vision. It didn't work well enough. Here's why, and what I replaced it with.
+
+## The Original Model: Pure Computer Vision
+
+The first approach was entirely OpenCV-based. Frame-by-frame analysis with three signals:
+
+**Frame Delta Score** — absolute pixel difference between consecutive frames:
+\`delta = sum(abs(frame_n - frame_{n-1})) / (width * height)\`
+
+A high delta score indicates scene change, action, or transition. Fights, kills, and highlight moments tend to cluster around high delta events.
+
+**Histogram Comparison** — HSV color distribution shift between frames using Bhattacharyya distance:
+\`dist = sqrt(1 - sum(sqrt(h1_i * h2_i)))\`
+
+Useful for detecting death screens, scoreboards, and UI transitions, which have characteristic color signatures.
+
+**Optical Flow Magnitude** — Farnebäck dense optical flow, summing motion vectors:
+\`motion = mean(sqrt(flow_x^2 + flow_y^2))\`
+
+High motion indicates gameplay action. Low motion between high-motion windows = potential clip boundary.
+
+The composite score was a weighted sum: \`score = 0.4 * delta + 0.3 * histogram_shift + 0.3 * motion\`. Frames scoring above a threshold got flagged as highlight candidates. Contiguous runs of flagged frames became clips.
+
+## Why It Failed
+
+The false positive rate was ~40% on real footage. The model had no semantic understanding. An inventory screen opening created high delta. A spectator replay triggered high motion. A loading screen with animated elements scored higher than an actual kill.
+
+More critically, it was completely blind to death screens — which are semantically important (clip should end before the death, or include it as a dramatic beat) but visually variable. Different games, different death animations, different UI. No single histogram threshold caught them reliably.
+
+After testing on 22GB of footage across multiple games, the precision/recall curve was unacceptable for a product. High recall, terrible precision.
+
+## The Insight: CV as a Cost Filter
+
+The real cost of the pure CV model wasn't the false positives — it was that fixing them required individual per-game tuning, and even then you'd never get semantic accuracy. Computer vision can tell you *something changed*. It cannot tell you *something meaningful happened*.
+
+But LLM/vision API calls on every frame are economically insane. At 24fps over a 2-hour session, that's 172,800 frames. At Claude Vision API pricing, that's hundreds of dollars per video.
+
+The insight: **use CV to discard the obvious 85%, then use AI only on the ambiguous 15%.**
+
+## The Hybrid Pipeline
+
+Stage 1–3: Standard CV scoring as before. Frames that score in the bottom 70% of the delta distribution are immediately discarded — no action happening, no need for further processing.
+
+Stage 4: The "ambiguous zone" — frames that score in the middle 15% get sent to Claude Vision API with a structured prompt:
+
+\`Is this frame from a gaming highlight moment? Specifically: is there an active kill, elimination, objective capture, or significant in-game event visible? Respond with: HIGHLIGHT / TRANSITION / DEAD_TIME and a 1-sentence reason.\`
+
+The structured response lets me parse programmatically without relying on free-text output.
+
+Stage 5: Top 15% of CV scorers are flagged as automatic highlight candidates — no vision API call needed. High delta + high motion + known UI signature = clip. The CV threshold here is conservative (high precision, accept lower recall) because the API fills the gap.
+
+## The Economics
+
+Testing on 22GB of footage:
+- Pure CV: $0 but 40% false positive rate
+- Pure Vision API: ~$180–220 per video at 24fps — unviable
+- Hybrid: $0.20–0.40 per video, ~94% precision on highlight detection
+
+The math works because the CV filter is aggressive. On typical gameplay footage, 85% of frames are dead time — respawn screens, menus, walking, spectating. CV catches all of that for free. The vision API only touches the genuinely ambiguous content.
+
+## EasyOCR Integration: Death-Aware Scoring
+
+One additional layer: EasyOCR on frames flagged by the kill/death detection heuristic. Death screens in most games contain text: "ELIMINATED", "YOU DIED", "DEFEAT". OCR is fast, cheap, and accurate for this — far better than trying to model death screens visually.
+
+When an OCR-detected death follows within 8 seconds of a high-score highlight frame, the clip is trimmed to include 2 seconds post-death rather than cutting immediately. This preserves the narrative arc — the highlight, then the consequence.
+
+## What the Algorithm Switch Taught Me
+
+The lesson wasn't "CV is bad" or "AI is better." It was that the right model depends on the cost structure of the problem.
+
+CV is fast, deterministic, and free. AI is semantic, flexible, and has a per-call cost. The question is always: where is the decision boundary expensive enough to justify the AI call?
+
+In Viral Clips, the expensive boundary is semantic understanding. Everything below that boundary — "is there motion in this frame?" — is CV territory. That's the architecture.`
+    });
 
   const existingProjects = await storage.getProjects();
   if (existingProjects.length === 0) {
