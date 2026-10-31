@@ -85,7 +85,7 @@ async function buildAll() {
   // Function runtime config
   await writeFile(
     ".vercel/output/functions/api.func/.vc-config.json",
-    JSON.stringify({ runtime: "nodejs20.x", handler: "index.js", launcherType: "Nodejs" }, null, 2),
+    JSON.stringify({ runtime: "nodejs22.x", handler: "index.js", launcherType: "Nodejs" }, null, 2),
   );
 
   // Routing config:
