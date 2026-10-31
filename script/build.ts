@@ -23,6 +23,8 @@ const allowlist = [
   "passport",
   "passport-local",
   "pg",
+  "react",
+  "react-dom",
   "resend",
   "stripe",
   "uuid",
