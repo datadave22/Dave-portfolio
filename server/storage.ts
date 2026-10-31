@@ -1,60 +1,47 @@
 import { db } from "./db";
 import {
-  posts, projects, messages,
-  type Post, type InsertPost,
-  type Project, type InsertProject,
+  messages,
+  type Post,
+  type Project,
   type Message, type InsertMessage
 } from "@shared/schema";
-import { eq, desc } from "drizzle-orm";
+import { POSTS, PROJECTS } from "@shared/content";
 
 export interface IStorage {
   // Posts
   getPosts(): Promise<Post[]>;
   getPost(slug: string): Promise<Post | undefined>;
-  createPost(post: InsertPost): Promise<Post>;
 
   // Projects
   getProjects(): Promise<Project[]>;
   getProject(id: number): Promise<Project | undefined>;
-  createProject(project: InsertProject): Promise<Project>;
 
-  // Messages
-  createMessage(message: InsertMessage): Promise<Message>;
+  // Messages (null when no database is configured)
+  createMessage(message: InsertMessage): Promise<Message | null>;
 }
 
-export class DatabaseStorage implements IStorage {
+export class ContentStorage implements IStorage {
   async getPosts(): Promise<Post[]> {
-    return await db.select().from(posts).orderBy(desc(posts.publishedAt));
+    return POSTS.filter(p => p.status === "published");
   }
 
   async getPost(slug: string): Promise<Post | undefined> {
-    const [post] = await db.select().from(posts).where(eq(posts.slug, slug));
-    return post;
-  }
-
-  async createPost(post: InsertPost): Promise<Post> {
-    const [newPost] = await db.insert(posts).values(post).returning();
-    return newPost;
+    return POSTS.find(p => p.slug === slug && p.status === "published");
   }
 
   async getProjects(): Promise<Project[]> {
-    return await db.select().from(projects).orderBy(projects.order);
+    return [...PROJECTS].sort((a, b) => a.order - b.order);
   }
 
   async getProject(id: number): Promise<Project | undefined> {
-    const [project] = await db.select().from(projects).where(eq(projects.id, id));
-    return project;
+    return PROJECTS.find(p => p.id === id);
   }
 
-  async createProject(project: InsertProject): Promise<Project> {
-    const [newProject] = await db.insert(projects).values(project).returning();
-    return newProject;
-  }
-
-  async createMessage(message: InsertMessage): Promise<Message> {
+  async createMessage(message: InsertMessage): Promise<Message | null> {
+    if (!db) return null;
     const [newMessage] = await db.insert(messages).values(message).returning();
     return newMessage;
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new ContentStorage();

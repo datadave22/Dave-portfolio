@@ -71,7 +71,7 @@ export function useSendMessage() {
       });
       
       if (!res.ok) {
-        if (res.status === 400) {
+        if (res.status === 400 || res.status === 503) {
           const error = await res.json();
           throw new Error(error.message || "Validation failed");
         }

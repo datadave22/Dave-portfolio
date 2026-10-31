@@ -415,7 +415,7 @@ export default function Home() {
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-primary text-xs font-mono mb-4 block uppercase tracking-widest"
             >
-              Built by this engineer
+              Contract work
             </motion.span>
             <motion.h2
               variants={prefersReducedMotion ? undefined : staggerItem}
@@ -427,13 +427,13 @@ export default function Home() {
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-neutral-400 text-lg leading-relaxed mb-4"
             >
-              AI-powered resume optimization that I built and run. Upload your resume, select the role — get a professionally rewritten version in under 30 seconds.
+              AI-powered resume optimization that I build and operate under contract. Upload your resume, select the role — get a professionally rewritten version in under 30 seconds.
             </motion.p>
             <motion.p
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-neutral-500 leading-relaxed mb-8"
             >
-              Full-stack: React, Express, PostgreSQL, Stripe, GPT-4o. The architecture decisions behind it are documented in the Insights section.
+              Full-stack: React, Express, PostgreSQL, Stripe, GPT-4o. The architecture behind it is covered in the Insights section.
             </motion.p>
             <motion.div
               variants={prefersReducedMotion ? undefined : staggerItem}

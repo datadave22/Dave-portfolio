@@ -14,7 +14,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           title="WORK ARCHIVE"
-          subtitle="A comprehensive list of selected commercial and personal projects. Click any project for full details."
+          subtitle="Contract engagements and selected projects. Click any project for full details."
           className="mb-16"
         />
 

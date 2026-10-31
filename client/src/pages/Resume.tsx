@@ -80,7 +80,7 @@ export default function Resume() {
     },
     {
       project: "Viral Clips",
-      role: "Personal project",
+      role: "R&D project",
       period: "2024",
       description: "Automated video pipeline that turns raw gaming footage into short vertical clips with clip extraction and highlight detection.",
     },
