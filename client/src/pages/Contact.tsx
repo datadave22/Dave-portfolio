@@ -47,13 +47,13 @@ export default function Contact() {
         <div>
           <SectionHeader 
             title="GET IN TOUCH" 
-            subtitle="Available for engineering roles and technical consultation."
+            subtitle="Open to IT support, help desk and systems administrator roles."
             className="mb-12"
           />
           
           <div className="space-y-8 text-lg text-muted-foreground">
             <p>
-              Interested in collaboration, engineering roles, or technical consultation? 
+              Hiring for IT support, help desk or systems administration? 
               Feel free to reach out — I respond promptly.
             </p>
             <div>

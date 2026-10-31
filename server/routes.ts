@@ -338,10 +338,10 @@ In Viral Clips, the expensive boundary is semantic understanding. Everything bel
       year: "2022"
     });
     await storage.createProject({
-      name: "StarFire GNSS Firmware Validation — John Deere Advanced R&D",
-      description: "Validated 50–100 firmware iterations per cycle for StarFire GNSS receivers supporting GPS, Galileo, GLONASS, and BeiDou constellations. Processed GB-to-TB telemetry datasets monthly to validate ML positioning algorithms. Automated test pipelines achieving improvements that scaled to millions in annual cost savings.",
-      role: "Software Engineer / Embedded Systems Security",
-      techStack: ["Python", "pandas", "NumPy", "SciPy", "MATLAB", "Embedded Linux", "GNSS/RTK"],
+      name: "GPS Receiver Test Automation — John Deere",
+      description: "Built Ansible test infrastructure on WSL and Linux that configured and validated 50–100 GPS receivers, antennas and circuit boards at once over serial, bus and network interfaces. Ran synthetic-signal and GPS almanac tests, confirmed with live telemetry from a field test van, to catch receiver, antenna and microprocessor failures before field deployment.",
+      role: "DevOps & Test Infrastructure Engineer (Contract)",
+      techStack: ["Ansible", "Linux", "WSL", "Python", "GNSS"],
       featured: true,
       year: "2023"
     });

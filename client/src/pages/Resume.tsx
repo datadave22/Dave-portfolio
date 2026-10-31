@@ -11,67 +11,78 @@ export default function Resume() {
   const prefersReducedMotion = useReducedMotion();
 
   const coreStrengths = [
-    "CI/CD Automation & Pipeline Engineering",
-    "HPC (CPU/GPU) Environments — MPI, CUDA, Trilinos",
-    "Linux Systems & Internals (RHEL, Ubuntu)",
-    "Container Platforms — Docker, Kubernetes",
-    "Embedded Systems & Firmware Security",
-    "Secure & Regulated Environments (DOE L-clearance)",
-    "Full-Stack SaaS — React, Node.js, PostgreSQL",
-    "Penetration Testing & Threat Modeling",
+    "Help Desk & Desktop Support — Windows, macOS, imaging",
+    "Active Directory, Group Policy & Microsoft 365",
+    "Entra ID (Azure AD), Intune & MFA",
+    "Linux Systems Administration (RHEL)",
+    "CI/CD — Jenkins, GitHub Actions, CDash",
+    "Scripting — PowerShell, Bash, Python, Ansible",
+    "AWS Operations — EC2, S3, IAM, VPC, RDS, Lambda",
+    "Former DOE L Clearance · CPTC 2021 Top 5",
   ];
 
   const experience = [
     {
-      company: "John Deere",
-      role: "Advanced R&D — Software Engineer, Embedded Systems & Security",
-      period: "Dec 2023 – Present",
+      company: "ResumePolish.io and contract clients",
+      role: "IT Support & DevOps Engineer (Contract)",
+      period: "2022 – Present",
       highlights: [
-        "Firmware hardening and security analysis for embedded systems in agricultural and autonomous equipment",
-        "Threat modeling and vulnerability assessment across constrained embedded environments",
-        "Developed tooling to automate security validation workflows in the hardware bring-up pipeline",
-        "Cross-functional collaboration with hardware, firmware, and product security teams",
+        "Provide on-site and remote IT support to private and commercial clients: network cabling, Mac and Windows onboarding with VPN and proxy setup, device wiping and reimaging, and asset tracking",
+        "Support a web app with 2,000+ users, monitored with Prometheus and Grafana",
+        "Maintain the app's production AWS services (EC2, S3, IAM, VPC, RDS, Lambda), and moved it from containers to serverless once it was clear its scale didn't justify Kubernetes",
+        "Automate maintenance with Bash and Python, and keep runbooks so recurring issues only get solved once",
       ],
-      impact: "Strengthened security posture for embedded platforms operating in safety-critical, real-world deployments.",
+      impact: "Cut the app's error rate from 18% to under 1%.",
+    },
+    {
+      company: "John Deere",
+      role: "DevOps & Test Infrastructure Engineer (Contract)",
+      period: "Feb 2023 – Feb 2025",
+      highlights: [
+        "Built WSL and Linux test infrastructure with Ansible that configured and validated 50–100 GPS receivers, antennas and circuit boards at once over serial, bus and network interfaces",
+        "Ran synthetic-signal and GPS almanac tests, confirmed with live telemetry from a field test van",
+        "Managed access for engineers on lab and test-van equipment, and tracked lab assets from YubiKeys and laptops to network gear and prototype boards",
+        "Wired test benches linking circuit boards, serial and diagnostic ports to tractor microcontrollers and embedded sensors such as LiDAR",
+      ],
+      impact: "Caught receiver, antenna and microprocessor failures before field deployment.",
     },
     {
       company: "Sandia National Laboratories",
-      role: "DevOps / MLOps Platform Engineer — Trilinos Project (DOE)",
-      period: "Jan 2022 – Nov 2023",
+      role: "Software Engineer: DevOps & Linux Systems Support (Contract)",
+      period: "2019 – 2024",
       highlights: [
-        "Owned CI/CD infrastructure for Trilinos — a 50+ package scientific software collection used on U.S. Top 500 supercomputers",
-        "Managed thousands of CMake/TriBITS build configurations across CUDA, MPI, and compiler matrix permutations",
-        "Debugged complex pipeline failures spanning Jenkins, GitHub Actions, and RHEL HPC cluster environments",
-        "Built reproducible ML infrastructure and GPU-accelerated build environments for research computing teams",
+        "Took over DevOps and systems support for Trilinos, Sandia's open-source scientific computing library (66+ packages), succeeding a senior engineer with two decades on the project, on a 5-person team serving 50–100 researchers",
+        "Kept the Jenkins, GitHub Actions and CDash CI/CD pipeline at 99.99% uptime through daily triage of build and test failures on HPC clusters",
+        "Hardened login nodes (SELinux, restricted sudo, SSH key-only auth), managed user access on restricted networks under a DOE L clearance (now inactive), and onboarded 20+ researchers",
       ],
-      impact: "Sustained CI reliability for a mission-critical open-source project under DOE L-clearance with zero tolerance for undetected regressions.",
+      impact: "Led a rolling RHEL 7 to RHEL 8 migration of a 40-node cluster in 3 weeks with zero research data loss.",
     },
     {
-      company: "CSUF — CPTC Team",
-      role: "Collegiate Penetration Testing Competition — National Competitor",
-      period: "Aug 2018 – Nov 2022",
+      company: "North Orange County Community College District & CyberPatriot",
+      role: "Linux Team Lead (2018–2022) · IT Support Technician (2017–2018) · CS Intern (2014–2017)",
+      period: "2014 – 2022",
       highlights: [
-        "Placed Top 5 nationally in the 2021 CPTC — realistic enterprise penetration testing against simulated corporate infrastructure",
-        "Led web application exploitation, lateral movement, and privilege escalation phases",
-        "Delivered executive-facing reports with vulnerability findings, risk ratings, and remediation guidance",
-        "Also competed in CyberPatriot and multiple regional CTF events throughout undergraduate studies",
+        "Supported growth from ~500 to 4,000+ users across district sites; resolved 85% of tickets on first contact in Jira and ServiceNow and cut the Tier 2 backlog 40%",
+        "Migrated 800 users from on-premises Active Directory to Azure AD (now Microsoft Entra ID), set up MFA for 2,000+ users in the Office 365 move, and enrolled 200+ devices in Intune at 97% compliance",
+        "Led recovery when the competition platform failed mid-event: directed 5 engineers to restore ~10 servers and hundreds of VMs for 500–1,000 concurrent users in under 45 minutes",
+        "Cut onboarding from 4 hours to 30 minutes with a PowerShell script; racked and cabled servers and network gear, and reimaged VMware VMs and lab machines by the hundreds",
       ],
-      impact: "Developed applied offensive security skills and professional reporting under high-stakes competitive pressure.",
+      impact: "Grew from lab intern to IT support technician to Linux team lead over 8 years.",
     },
   ];
 
   const independentWork = [
     {
-      project: "ResumePolish.io",
-      role: "Founder & Solo Engineer",
-      period: "2024 – Present",
-      description: "AI-powered resume analysis SaaS. Built full-stack from scratch: React frontend, Node.js/Express API, PostgreSQL, Stripe billing, and OpenAI integration. Designed the architecture to handle growth — deliberate choices on connection pooling, async job queues, and monolithic-vs-service boundaries before traffic warranted it.",
+      project: "CPTC 2021 — Collegiate Penetration Testing Competition",
+      role: "Cal State Fullerton team",
+      period: "2021",
+      description: "Placed top 5 of 67 universities in a professional penetration testing competition against simulated corporate infrastructure, with a written findings report.",
     },
     {
       project: "Viral Clips",
-      role: "Founder & Solo Engineer",
+      role: "Personal project",
       period: "2024",
-      description: "Automated video content repurposing tool. ML pipeline for clip extraction and highlight detection. Explored unit economics and infrastructure costs at scale before deciding on build-vs-buy trade-offs for video processing.",
+      description: "Automated video pipeline that turns raw gaming footage into short vertical clips with clip extraction and highlight detection.",
     },
   ];
 
@@ -89,7 +100,7 @@ export default function Resume() {
                 David Johnson
               </h1>
               <p className="text-xl text-muted-foreground">
-                Senior Platform Engineer — HPC · Embedded Systems · MLOps
+                IT Support & Systems Administrator — Windows · Microsoft 365 · Linux · DevOps
               </p>
             </div>
             <a
@@ -118,7 +129,7 @@ export default function Resume() {
             Summary
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Platform engineer with 7+ years spanning U.S. national labs, Fortune 500 R&D, and solo SaaS. At Sandia National Laboratories I owned CI/CD for Trilinos across thousands of build configurations on Top 500 supercomputers. At John Deere I work on embedded systems security for safety-critical equipment. Between those, I built and shipped ResumePolish.io from zero to production — solo. I design systems with scale trade-offs in mind before the traffic arrives: connection pooling, queue depth, service boundaries, and failure modes.
+            IT support and systems administrator with 10+ years in IT. At the North Orange County Community College District I grew from lab intern to IT support technician to Linux team lead, supporting a user base that grew from about 500 to 4,000+. Since then I've supported researchers' Linux systems and the Trilinos CI/CD pipeline at Sandia National Laboratories, built Ansible test automation for GPS receivers at John Deere, and run releases, monitoring and AWS services for ResumePolish.io. Earlier: General Manager at Verizon and Off-Site Supervisor at FedEx Freight.
           </p>
         </motion.section>
 
@@ -213,7 +224,7 @@ export default function Resume() {
           className="mb-16"
         >
           <h2 className="text-xs font-mono text-primary uppercase tracking-widest mb-8">
-            Independent Work
+            Projects & Competitions
           </h2>
           <motion.div
             variants={prefersReducedMotion ? undefined : staggerContainer}
@@ -260,11 +271,11 @@ export default function Resume() {
             <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-2">
               <div>
                 <h3 className="text-xl font-display font-medium">California State University, Fullerton</h3>
-                <p className="text-muted-foreground">B.S. Computer Science — GPA 3.5</p>
+                <p className="text-muted-foreground">B.S. Computer Science, Emphasis in Mathematics — GPA 3.5</p>
               </div>
-              <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">2018 – 2022</span>
+              <span className="text-sm font-mono text-muted-foreground whitespace-nowrap">Expected 2027</span>
             </div>
-            <p className="text-sm text-muted-foreground">CPTC team lead, CyberPatriot competitor, coursework in systems programming, algorithms, and computer security.</p>
+            <p className="text-sm text-muted-foreground">CPTC 2021 national competitor (top 5 of 67 universities).</p>
           </div>
         </motion.section>
 
@@ -277,10 +288,10 @@ export default function Resume() {
           className="text-center pt-12 border-t border-border"
         >
           <h2 className="text-2xl font-display font-medium mb-4">
-            Interested in working together?
+            Hiring for IT support or systems administration?
           </h2>
           <p className="text-muted-foreground mb-8">
-            I'm available for engineering roles, technical consultation, and collaboration opportunities.
+            I'm open to IT support, help desk, systems administrator and IT operations roles in Los Angeles and Orange County, or remote. Any shift, including overnight.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a

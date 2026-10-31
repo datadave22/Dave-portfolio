@@ -15,7 +15,7 @@ export default function Posts() {
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           title="INSIGHTS"
-          subtitle="Technical articles on platform engineering, architecture decisions, and real production trade-offs."
+          subtitle="Notes on IT support, Linux, CI/CD and the projects I run."
           className="mb-16"
         />
 

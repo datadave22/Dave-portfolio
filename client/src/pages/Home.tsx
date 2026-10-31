@@ -36,10 +36,10 @@ export default function Home() {
   ];
 
   const professionalStrengths = [
-    { icon: Cpu, title: "HPC & GPU Computing", desc: "CUDA-accelerated builds, MPI workflows, configuration matrices across thousands of build permutations on U.S. Top 500 supercomputers" },
-    { icon: GitMerge, title: "Platform Engineering & CI/CD", desc: "Trilinos, CMake/TriBITS, Jenkins, GitHub Actions — root-cause analysis on complex pipeline failures at national lab scale" },
-    { icon: Database, title: "Systems Design & Scale", desc: "Intentional trade-offs: monolith vs. microservices, connection pooling strategies, and architecture decisions before 100K-user problems arrive" },
-    { icon: Shield, title: "Security & Regulated Environments", desc: "DOE L-clearance, penetration testing, embedded firmware hardening, CPTC national competitor (Top 5, 2021)" },
+    { icon: Cpu, title: "Help Desk & End-User Support", desc: "Walk-up, phone and remote support for a user base that grew from ~500 to 4,000+; 85% of tickets resolved on first contact in Jira and ServiceNow; imaging, printers and phones" },
+    { icon: Database, title: "Microsoft 365 & Identity", desc: "Active Directory, Group Policy, Exchange and Microsoft 365; an 800-user move to Azure AD (now Entra ID), MFA for 2,000+ users, and 200+ devices enrolled in Intune" },
+    { icon: GitMerge, title: "Linux Systems & CI/CD", desc: "RHEL administration and a 40-node RHEL 7 to 8 migration at Sandia; daily build and test triage on the Jenkins, GitHub Actions and CDash pipeline for Trilinos (66+ packages)" },
+    { icon: Shield, title: "Security", desc: "Former DOE L clearance, login-node hardening (SELinux, restricted sudo, SSH keys), and CPTC 2021: top 5 of 67 universities" },
   ];
 
   return (
@@ -75,7 +75,7 @@ export default function Home() {
             />
             
             <p className="text-primary text-sm font-mono uppercase tracking-widest mb-4">
-              Senior Platform Engineer — HPC · MLOps · Distributed Systems
+              IT Support & Systems Administrator — Windows · Microsoft 365 · Linux · DevOps
             </p>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium tracking-tighter leading-[0.95] text-balance mb-6">
@@ -92,10 +92,10 @@ export default function Home() {
           >
             <div className="md:col-span-6 md:col-start-7">
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light mb-6">
-                7+ years building production infrastructure at DOE national labs and Fortune 500 R&D. CI/CD pipelines spanning thousands of build configurations, GPU-accelerated computing environments, and full-stack systems shipped to production.
+                10+ years in IT, from a college district help desk serving 4,000+ users to Linux and CI/CD support at Sandia National Laboratories, test infrastructure at John Deere, and running a web app in production.
               </p>
               <p className="text-base text-muted-foreground/80 leading-relaxed mb-8">
-                From Trilinos on U.S. Top 500 supercomputers to AI-powered SaaS with live Stripe payments — I build systems that scale and make deliberate trade-offs before the traffic arrives.
+                Calm troubleshooting, clear documentation, and turning a one-off fix into a runbook so it only has to be solved once.
               </p>
               
               <div className="flex flex-wrap gap-4 items-center">
@@ -173,20 +173,21 @@ export default function Home() {
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-3xl md:text-4xl font-display leading-tight mb-8"
             >
-              Platform engineering at national-lab scale, SaaS in production
+              From the help desk to Linux systems and DevOps
             </motion.h2>
-            <motion.p 
+            <motion.p
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-neutral-400 text-lg leading-relaxed mb-6"
             >
-              I spent two years at Sandia National Laboratories owning CI/CD for the Trilinos scientific software collection — thousands of build configurations, GPU clusters, and U.S. Top 500 supercomputers. Since then I've shipped ResumePolish.io from zero to paying users, solo. I make deliberate trade-offs: monolith vs. microservices, connection pool sizing, queuing strategies — before scale becomes the emergency.
+              I started as a lab intern at the North Orange County Community College District and grew into IT support technician, then Linux team lead. At Sandia National Laboratories I took over DevOps and Linux systems support for Trilinos, keeping its CI/CD pipeline running through daily build triage on HPC clusters. At John Deere I built Ansible test infrastructure for GPS receivers. Today I run releases, monitoring and AWS services for ResumePolish.io.
             </motion.p>
-            <motion.div 
+            <motion.div
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="flex flex-wrap gap-3 mt-8"
             >
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">NOCCCD Help Desk → Linux Lead</span>
               <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">Trilinos / Sandia Labs</span>
-              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">ResumePolish.io Founder</span>
+              <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">ResumePolish.io</span>
               <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm border border-neutral-700">CPTC National Top 5</span>
             </motion.div>
           </motion.div>
@@ -265,21 +266,21 @@ export default function Home() {
             <motion.div variants={prefersReducedMotion ? undefined : staggerItem} className="p-6 border border-border bg-card">
               <h3 className="text-lg font-display font-medium mb-4">Core Technical Skills</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Languages: Python, C++, TypeScript, Bash</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Infra: Docker, Kubernetes, Jenkins, GitHub Actions</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Support: Windows 10/11, macOS, Active Directory, Microsoft 365, Intune, Jira, ServiceNow</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Linux & scripting: RHEL, Bash, PowerShell, Python, Ansible</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> CI/CD & cloud: Jenkins, GitHub Actions, Docker, AWS (EC2, S3, IAM, RDS, Lambda)</li>
                 <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> HPC: MPI, CUDA, CMake/TriBITS, Trilinos</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Platforms: Linux (RHEL/Ubuntu), AWS, PostgreSQL</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Security: Penetration testing, CPTC, DOE L-clearance</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Security: SELinux, MFA, CPTC 2021, former DOE L clearance</li>
               </ul>
             </motion.div>
             <motion.div variants={prefersReducedMotion ? undefined : staggerItem} className="p-6 border border-border bg-card">
-              <h3 className="text-lg font-display font-medium mb-4">Engineering Approach</h3>
+              <h3 className="text-lg font-display font-medium mb-4">How I Work</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Trade-off analysis before scale hits (100K+ user design)</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Monolith vs. microservices — right tool, right time</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Connection pooling, queue depth, and async patterns</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Failure mode analysis and root-cause debugging</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Solo SaaS → production (auth, billing, infra, observability)</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Troubleshoot step by step and find the root cause</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Write runbooks so a fix only has to happen once</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Follow the team's standards, and improve them when something breaks</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Explain technical issues clearly to non-technical users</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary" /> Monitor first: Prometheus and Grafana cut one app's error rate from 18% to under 1%</li>
               </ul>
             </motion.div>
           </motion.div>
@@ -369,7 +370,7 @@ export default function Home() {
                 Competed in the Collegiate Penetration Testing Competition at CSUF — placed Top 5 nationally in 2021. Realistic enterprise engagement scenarios: web app exploitation, lateral movement, privilege escalation, and professional executive-facing reporting.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Combined with a DOE L-clearance and embedded firmware work at John Deere, this isn't checkbox security — it's applied threat modeling and defense-in-depth across systems that matter.
+                On the job, that carried into hardening login nodes and managing access on restricted networks at Sandia (former DOE L clearance), and managing engineers' access to lab and test-van equipment at John Deere.
               </p>
             </div>
             <div className="relative aspect-square bg-muted/50 overflow-hidden border border-border">
@@ -426,7 +427,7 @@ export default function Home() {
               variants={prefersReducedMotion ? undefined : staggerItem}
               className="text-neutral-400 text-lg leading-relaxed mb-4"
             >
-              AI-powered resume optimization built and shipped solo. Upload your resume, select the role — get a professionally rewritten version in under 30 seconds.
+              AI-powered resume optimization that I built and run. Upload your resume, select the role — get a professionally rewritten version in under 30 seconds.
             </motion.p>
             <motion.p
               variants={prefersReducedMotion ? undefined : staggerItem}
@@ -564,10 +565,10 @@ export default function Home() {
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-display font-medium mb-6">
-            Let's Build Something Together
+            Let's Work Together
           </h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Open to senior platform, infrastructure, or ML engineer roles. Also available for fractional technical leadership and architecture consulting.
+            Open to IT support, help desk, systems administrator and IT operations roles in Los Angeles and Orange County, or remote. Any shift, including overnight.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 

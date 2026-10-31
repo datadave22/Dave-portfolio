@@ -80,7 +80,7 @@ The Cal State Fullerton team was coached by Hernan Manabat (alumnus, CS lecturer
 
 Trilinos is an open-source collection of scientific libraries and tools focused on solving large-scale, complex multi-physics engineering and scientific problems. It's used in structural mechanics simulations, climate modeling, nuclear weapons research, and a dozen other domains. Thousands of developers, scientists, and companies depend on it being stable and buildable.
 
-The framework is large. Hundreds of packages. Millions of lines of C++. And it has to build — correctly — across an enormous matrix of configurations.
+The framework is large. 66+ packages. Millions of lines of C++. And it has to build — correctly — across an enormous matrix of configurations.
 
 ## The Configuration Matrix Problem
 
@@ -114,7 +114,7 @@ The difference between managing CI for a typical software project and managing i
 
 The work pushed me toward a different mode of thinking: conservative changes, high confidence before enabling new configurations, and explicit documentation of why combinations are excluded rather than just marking them as unsupported.
 
-I was operating under DOE L-clearance for the duration of this work. Some of the applications Trilinos is used in, I'll leave as an exercise.`,
+I held a DOE L clearance (now inactive) for this work. Some of the applications Trilinos is used in, I'll leave as an exercise.`,
   },
   {
     title: "Building a Production SaaS Solo: Lessons from ResumePolish",
@@ -187,10 +187,10 @@ const PROJECT_DATA = [
     year: "2022",
   },
   {
-    name: "StarFire GNSS Firmware Validation — John Deere Advanced R&D",
-    description: "Validated 50–100 firmware iterations per cycle for StarFire GNSS receivers supporting GPS, Galileo, GLONASS, and BeiDou constellations across precision agriculture and autonomous vehicle systems. Processed GB-to-TB telemetry datasets monthly using Python to validate ML positioning algorithms. Automated test pipelines achieving microsecond-to-millisecond improvements that scaled to millions in annual cost savings across worldwide equipment fleets.",
-    role: "Software Engineer / Embedded Systems Security",
-    techStack: ["Python", "pandas", "NumPy", "SciPy", "MATLAB", "Embedded Linux", "GNSS/RTK", "Hardware-in-the-loop Testing"],
+    name: "GPS Receiver Test Automation — John Deere",
+    description: "Built Ansible test infrastructure on WSL and Linux that configured and validated 50–100 GPS receivers, antennas and circuit boards at once over serial, bus and network interfaces. Ran synthetic-signal and GPS almanac tests, confirmed with live telemetry from a field test van, to catch receiver, antenna and microprocessor failures before field deployment.",
+    role: "DevOps & Test Infrastructure Engineer (Contract)",
+    techStack: ["Ansible", "Linux", "WSL", "Python", "GNSS", "Hardware-in-the-loop Testing"],
     featured: true,
     year: "2023",
   },

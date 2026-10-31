@@ -11,7 +11,7 @@ export function Footer() {
             DAVID<span className="text-muted-foreground"> JOHNSON</span>
           </h3>
           <p className="text-sm text-muted-foreground max-w-xs">
-            Platform engineering at national-lab scale. SaaS in production. Deliberate trade-offs.
+            IT support and systems administration, with DevOps depth.
           </p>
         </div>
 
